@@ -11,7 +11,7 @@ public class RolUsuario {
 	
 	@Id
 	@Column(name="ID_ROL")
-	private int id;
+	private Long id;
 	
 	@Column(name="ROL")
 	private String rol;

@@ -6,14 +6,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="HORAS")
-public class Hora {
+@Table(name="REGION")
+public class Region {
 	
 	@Id
-	@Column(name="ID_HORA")
+	@Column(name="ID_REGION")
 	private Long id;
 	
-	@Column(name="HORA")
-	private String hora;
+	@Column(name="REGION")
+	private String region;
 
 }

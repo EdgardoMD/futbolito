@@ -11,7 +11,7 @@ public class EstadoHora {
 
 	@Id
 	@Column(name="ID_ESTADO")
-	private int id;
+	private Long id;
 	
 	@Column(name="ESTADO")
 	private String estado;

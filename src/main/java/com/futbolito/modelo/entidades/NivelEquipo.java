@@ -11,7 +11,7 @@ public class NivelEquipo {
 	
 	@Id
 	@Column(name="ID_NIVEL")
-	private int id;
+	private Long id;
 	
 	@Column(name="NIVEL")
 	private String nivel;
