@@ -1,0 +1,1 @@
+ng g module perfil/perfil --module app --flat --routing             //para generar un nuevo modulo con routing incluido
