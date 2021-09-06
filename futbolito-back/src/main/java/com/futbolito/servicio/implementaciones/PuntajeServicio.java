@@ -2,9 +2,12 @@ package com.futbolito.servicio.implementaciones;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.futbolito.modelo.entidades.Puntaje;
 import com.futbolito.servicio.interfaces.IPuntajeServicio;
 
+@Service
 public class PuntajeServicio implements IPuntajeServicio {
 
 	@Override

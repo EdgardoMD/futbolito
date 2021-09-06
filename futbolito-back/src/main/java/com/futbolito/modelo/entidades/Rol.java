@@ -13,14 +13,14 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="ROLES_USUARIO")
-public class RolUsuario {
+@Table(name="ROLES")
+public class Rol {
 	
 	@Id
 	@Column(name="ID_ROL")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-	private Long id;
+	private int id;
 	
 	@Column(name="ROL")
 	private String rol;

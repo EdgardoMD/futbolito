@@ -2,9 +2,12 @@ package com.futbolito.servicio.implementaciones;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.futbolito.modelo.entidades.Region;
 import com.futbolito.servicio.interfaces.IRegionServicio;
 
+@Service
 public class RegionServicio implements IRegionServicio {
 
 	@Override

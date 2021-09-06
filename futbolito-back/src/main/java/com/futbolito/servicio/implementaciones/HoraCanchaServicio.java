@@ -2,9 +2,12 @@ package com.futbolito.servicio.implementaciones;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.futbolito.modelo.entidades.HoraCancha;
 import com.futbolito.servicio.interfaces.IHoraCanchaServicio;
 
+@Service
 public class HoraCanchaServicio implements IHoraCanchaServicio {
 
 	@Override

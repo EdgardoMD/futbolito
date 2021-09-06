@@ -2,9 +2,12 @@ package com.futbolito.servicio.implementaciones;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.futbolito.modelo.entidades.DeportistaPartido;
 import com.futbolito.servicio.interfaces.IDeportistaPartidoServicio;
 
+@Service
 public class DeportistaPartidoServicio implements IDeportistaPartidoServicio {
 
 	@Override
