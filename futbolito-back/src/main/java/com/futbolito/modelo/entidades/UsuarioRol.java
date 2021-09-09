@@ -27,4 +27,11 @@ public class UsuarioRol {
 	@JoinColumn(name="rol_id", foreignKey = @ForeignKey(name = "FK_usuario_rol_rol"))
 	private Rol rol;
 
+	@Override
+	public String toString() {
+		return "UsuarioRol [rol=" + rol + "]";
+	}
+	
+	
+
 }

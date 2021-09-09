@@ -1,0 +1,15 @@
+<div>
+    <form #f="ngForm" (ngSubmit) = "onLogin()" novalidate>
+    <div>
+        <label for="nombreUsuario" >Email</label>
+        <input type="text" name="nombreUsuario" id="nombreUsuario" [(ngModel)]="nombreUsuario" required>
+    </div>
+    <div>
+        <label for="password" >contraseña</label>
+        <input type="password" name="password" id="password" [(ngModel)]="password" required>
+    </div>
+    <div>
+        <button type="submit" [disabled]="!f.valid">Iniciar Sesion</button>
+    </div>
+</form>
+</div>

@@ -47,4 +47,12 @@ public class JwtDto {
     public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
         this.authorities = authorities;
     }
+
+	@Override
+	public String toString() {
+		return "JwtDto [token=" + token + ", bearer=" + bearer + ", nombreUsuario=" + nombreUsuario + ", authorities="
+				+ authorities + "]";
+	}
+    
+    
 }

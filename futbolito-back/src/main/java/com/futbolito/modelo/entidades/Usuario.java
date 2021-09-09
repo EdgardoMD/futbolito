@@ -9,9 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -47,7 +45,7 @@ public class Usuario {
 
 	@JsonIgnore
 	@Transient
-	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
 	private Set<UsuarioRol> roles = new HashSet<>();
 
 	public Usuario(String nombre,  String telefono, String mail, String password) {

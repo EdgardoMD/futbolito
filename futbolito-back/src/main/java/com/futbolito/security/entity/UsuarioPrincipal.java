@@ -5,12 +5,16 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.futbolito.modelo.entidades.Usuario;
+import com.futbolito.modelo.entidades.UsuarioRol;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 public class UsuarioPrincipal implements UserDetails {
+	
+
 	
 
 	private static final long serialVersionUID = 1L;
@@ -28,9 +32,13 @@ public class UsuarioPrincipal implements UserDetails {
     }
 
     public static UsuarioPrincipal build(Usuario usuario){
-        List<GrantedAuthority> authorities =
-                usuario.getRoles().stream().map(rol -> new SimpleGrantedAuthority(rol
-                .getRol().getRol())).collect(Collectors.toList());
+    	Set<UsuarioRol> roles = usuario.getRoles();
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>() ;
+        for (UsuarioRol rol: roles) {
+    		authorities.add(new SimpleGrantedAuthority(rol.getRol().getRol() ));
+    	}
+        
+        
         return new UsuarioPrincipal(usuario.getId(), usuario.getNombre(),  usuario.getMail(), usuario.getPassword(), authorities);
     }
 

@@ -66,6 +66,7 @@ public class AuthController {
         UserDetails userDetails = (UserDetails)authentication.getPrincipal();
         System.out.println("llego a 5 controller");
         JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
+        System.out.println(jwtDto);
         System.out.println("llego a 6 controller");
         return new ResponseEntity<JwtDto>(jwtDto, HttpStatus.OK);
     }
