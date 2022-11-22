@@ -14,6 +14,6 @@ export class PerfilService {
   ) { }
 
   getPerfil() {
-  return this.http.get<Perfil>('http://localhost:9999/perfil')
+  return this.http.get<Perfil>('http://localhost:9999/profile')
   }
 }

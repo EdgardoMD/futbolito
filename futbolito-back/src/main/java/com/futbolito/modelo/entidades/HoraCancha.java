@@ -26,14 +26,14 @@ public class HoraCancha {
 	
 	@ManyToOne
 	@JoinColumn(name="ID_ESTADO")
-	private EstadoHora estado;
+	private StatusHours estado;
 	
 	@ManyToOne
 	@JoinColumn(name="ID_HORA")
-	private Hora hora;
+	private Hour hora;
 	
 	@ManyToOne
 	@JoinColumn(name="ID_CANCHA")
-	private Cancha cancha;
+	private Court cancha;
 
 }

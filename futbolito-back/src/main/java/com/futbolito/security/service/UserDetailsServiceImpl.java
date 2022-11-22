@@ -8,10 +8,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.futbolito.modelo.entidades.Usuario;
-import com.futbolito.modelo.repositorio.IUsuarioRolRepositorio;
-import com.futbolito.security.entity.UsuarioPrincipal;
-import com.futbolito.servicio.interfaces.IUsuarioServicio;
+import com.futbolito.modelo.entidades.User;
+import com.futbolito.modelo.repository.IUsuarioRolRepositorio;
+import com.futbolito.security.entity.MainUser;
+import com.futbolito.services.interfaces.IUsuarioServicio;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -25,10 +25,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException {
     	System.out.println("*****************paso por aqui");
-        Usuario usuario = usuarioSer.getByNombreUsuario(nombreUsuario).get();
-        usuario.setRoles( usuarioRolRepositorio.listarRolesPorUsuario(usuario.getId()));
+        User usuario = usuarioSer.getByNombreUsuario(nombreUsuario).get();
+        usuario.setRoles( usuarioRolRepositorio.listarRolesPorUsuario(usuario.getIdUser()));
         
         System.out.println("*****************usuario que se crea" + usuario);
-        return UsuarioPrincipal.build(usuario);
+        return MainUser.build(usuario);
     }
 }

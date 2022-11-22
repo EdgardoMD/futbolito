@@ -24,11 +24,11 @@ public class ComentarioDeportista {
 	
 	@ManyToOne
 	@JoinColumn(name="ID_DEPORTISTA")
-	private Deportista deportista;
+	private Athlete deportista;
 	
 	@OneToOne
 	@JoinColumn(name="ID_PARTIDO")
-	private Partido partido;
+	private Match partido;
 	
 	@Column(name="COMENTARIO")
 	private String comentario;

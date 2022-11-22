@@ -27,7 +27,7 @@ public class Puntaje {
 	
 	@OneToOne
 	@JoinColumn(name="ID_EQUIPO")
-	private Equipo equipo;
+	private Team equipo;
 	
 	@Column(name="PUNTAJE")
 	private int puntaje;

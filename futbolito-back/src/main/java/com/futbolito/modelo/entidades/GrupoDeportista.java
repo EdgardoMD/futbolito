@@ -26,11 +26,11 @@ public class GrupoDeportista {
 	
 	@ManyToOne
 	@JoinColumn(name="ID_EQUIPO")
-	private Grupo grupo;
+	private Group grupo;
 	
 	@ManyToOne
 	@JoinColumn(name="ID_DEPORTISTA")
-	private Deportista deportista;
+	private Athlete deportista;
 
 
 }
