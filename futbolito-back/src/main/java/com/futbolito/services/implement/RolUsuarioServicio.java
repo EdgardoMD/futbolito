@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.futbolito.modelo.entidades.Role;
-import com.futbolito.modelo.repository.IRolRepositorio;
+import com.futbolito.repository.IRoleRepository;
 import com.futbolito.services.interfaces.IRolUsuarioServicio;
 
 @Service
 public class RolUsuarioServicio implements IRolUsuarioServicio {
 
 	@Autowired
-	private IRolRepositorio RolUsuarioRep;
+	private IRoleRepository RolUsuarioRep;
 
 	@Override
 	public Role registrar(Role obj) {

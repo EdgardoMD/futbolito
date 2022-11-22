@@ -1,4 +1,4 @@
-package com.futbolito.modelo.repository;
+package com.futbolito.repository;
 
 import java.util.Optional;
 
@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.futbolito.modelo.entidades.User;
 
-public interface IUsuarioRepositorio extends JpaRepository<User, Long> {
+public interface IUserRepository extends JpaRepository<User, Long> {
 	
 	Optional<User> findByMail(String userName);
     boolean existsByMail(String email);

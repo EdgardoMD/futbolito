@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.futbolito.modelo.entidades.User;
 import com.futbolito.modelo.entidades.UserRole;
-import com.futbolito.modelo.repository.IRolRepositorio;
-import com.futbolito.modelo.repository.IUsuarioRepositorio;
-import com.futbolito.modelo.repository.IUsuarioRolRepositorio;
+import com.futbolito.repository.IRoleRepository;
+import com.futbolito.repository.IUserRepository;
+import com.futbolito.repository.IUserRoleRepository;
 import com.futbolito.security.dto.NewUser;
 import com.futbolito.services.interfaces.IUsuarioServicio;
 
@@ -21,13 +21,13 @@ import com.futbolito.services.interfaces.IUsuarioServicio;
 public class UsuarioServicio implements IUsuarioServicio {
 
 	@Autowired
-	private IUsuarioRepositorio UsuarioRep;
+	private IUserRepository UsuarioRep;
 	
 	@Autowired
-	private IUsuarioRolRepositorio UsuarioRolRep;
+	private IUserRoleRepository UsuarioRolRep;
 	
 	@Autowired
-	private IRolRepositorio rolRep;
+	private IRoleRepository rolRep;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;

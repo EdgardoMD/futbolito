@@ -1,4 +1,4 @@
-package com.futbolito.modelo.repository;
+package com.futbolito.repository;
 
 import java.util.Set;
 
@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import com.futbolito.modelo.entidades.IDUserRole;
 import com.futbolito.modelo.entidades.UserRole;
 
-public interface IUsuarioRolRepositorio extends JpaRepository<UserRole, IDUserRole> {
+public interface IUserRoleRepository extends JpaRepository<UserRole, IDUserRole> {
 
 	@Query(value = "SELECT * FROM usuario_rol where user_id = ? ", nativeQuery = true)
-	Set<UserRole> listarRolesPorUsuario(Long activo);
+	Set<UserRole> listRoleByUserId(Long activo);
 
 }
