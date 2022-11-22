@@ -1,7 +1,7 @@
 package com.futbolito.services.interfaces;
 
-import com.futbolito.modelo.entidades.HoraCancha;
+import com.futbolito.modelo.entidades.HourCourt;
 
-public interface IHoraCanchaServicio extends ICRUD<HoraCancha> {
+public interface IHoraCanchaServicio extends ICRUD<HourCourt> {
 
 }

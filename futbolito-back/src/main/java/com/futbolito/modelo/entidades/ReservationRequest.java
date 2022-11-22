@@ -30,7 +30,7 @@ public class ReservationRequest {
 	
 	@ManyToOne
 	@JoinColumn(name="id_hour")
-	private HoraCancha hour;
+	private HourCourt hour;
 	
 	@ManyToOne
 	@JoinColumn(name="id_team1")

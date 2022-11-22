@@ -13,22 +13,22 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="COMENTARIOS_DEPORTISTA")
-public class ComentarioDeportista {
+@Table(name="athlete_comments")
+public class AthleteComment {
 	
 	@Id
-	@Column(name="ID_COMENTARIO")
+	@Column(name="is_athlete_comments")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name="ID_DEPORTISTA")
-	private Athlete deportista;
+	@JoinColumn(name="id_athlete")
+	private Athlete athlete;
 	
 	@OneToOne
-	@JoinColumn(name="ID_PARTIDO")
-	private Match partido;
+	@JoinColumn(name="id_match")
+	private Match match;
 	
 	@Column(name="COMENTARIO")
 	private String comentario;

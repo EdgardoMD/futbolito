@@ -9,9 +9,9 @@ public class IDUserRole implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Long usuario;
+	private Long user;
 	
-	private int rol;
+	private int role;
 	
 	
 

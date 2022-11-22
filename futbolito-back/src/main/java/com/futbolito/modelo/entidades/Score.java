@@ -15,21 +15,21 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="PUNTAJES")
-public class Puntaje {
+@Table(name="scores")
+public class Score {
 	
 	
 	@Id
-	@Column(name="ID_PUNTAJE")
+	@Column(name="id_score")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
 	private Long id;
 	
 	@OneToOne
-	@JoinColumn(name="ID_EQUIPO")
-	private Team equipo;
+	@JoinColumn(name="id_team")
+	private Team team;
 	
-	@Column(name="PUNTAJE")
-	private int puntaje;
+	@Column(name="score")
+	private int score;
 
 }

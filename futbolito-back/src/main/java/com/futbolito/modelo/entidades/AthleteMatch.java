@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="athlete_match")
+@Table(name="athletes_matchs")
 public class AthleteMatch {
 	
 	@Id

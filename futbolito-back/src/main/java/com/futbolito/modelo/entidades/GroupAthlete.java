@@ -15,25 +15,22 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="HORAS_CANCHA")
-public class HoraCancha {
+@Table(name="groups_athletes")
+public class GroupAthlete {
 	
 	@Id
-	@Column(name="ID_HORA_CANCHA")
+	@Column(name="id_groups_athletes")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name="ID_ESTADO")
-	private StatusHours estado;
+	@JoinColumn(name="id_group")
+	private Group group;
 	
 	@ManyToOne
-	@JoinColumn(name="ID_HORA")
-	private Hour hora;
-	
-	@ManyToOne
-	@JoinColumn(name="ID_CANCHA")
-	private Court cancha;
+	@JoinColumn(name="id_athlete")
+	private Athlete athlete;
+
 
 }

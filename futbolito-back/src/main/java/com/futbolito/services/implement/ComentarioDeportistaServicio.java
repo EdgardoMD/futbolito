@@ -4,32 +4,32 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.futbolito.modelo.entidades.ComentarioDeportista;
+import com.futbolito.modelo.entidades.AthleteComment;
 import com.futbolito.services.interfaces.IComentarioDeportistaServicio;
 
 @Service
 public class ComentarioDeportistaServicio implements IComentarioDeportistaServicio {
 
 	@Override
-	public ComentarioDeportista registrar(ComentarioDeportista obj) {
+	public AthleteComment registrar(AthleteComment obj) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ComentarioDeportista modificar(ComentarioDeportista obj) {
+	public AthleteComment modificar(AthleteComment obj) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<ComentarioDeportista> listar() {
+	public List<AthleteComment> listar() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ComentarioDeportista leerPorId(Long id) {
+	public AthleteComment leerPorId(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
