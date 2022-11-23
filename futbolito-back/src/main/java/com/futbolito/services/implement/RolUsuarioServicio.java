@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.futbolito.modelo.entidades.Role;
+import com.futbolito.models.entidades.Role;
 import com.futbolito.repository.IRoleRepository;
 import com.futbolito.services.interfaces.IRolUsuarioServicio;
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.futbolito.modelo.entidades.AtheteTeam;
+import com.futbolito.models.entidades.AtheteTeam;
 import com.futbolito.services.interfaces.IEquipoDeportistaServicio;
 
 @Service

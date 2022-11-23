@@ -1,6 +1,6 @@
 package com.futbolito.services.interfaces;
 
-import com.futbolito.modelo.entidades.QualificationTeam;
+import com.futbolito.models.entidades.QualificationTeam;
 
 public interface ICalificacionCanchaServicio extends ICRUD<QualificationTeam> {
 

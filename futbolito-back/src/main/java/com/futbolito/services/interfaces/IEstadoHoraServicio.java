@@ -1,6 +1,6 @@
 package com.futbolito.services.interfaces;
 
-import com.futbolito.modelo.entidades.StatusHours;
+import com.futbolito.models.entidades.StatusHours;
 
 public interface IEstadoHoraServicio extends ICRUD<StatusHours> {
 

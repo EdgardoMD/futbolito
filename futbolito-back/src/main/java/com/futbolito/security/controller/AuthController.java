@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import com.futbolito.modelo.DTOs.Message;
+import com.futbolito.models.DTOs.Message;
 import com.futbolito.security.dto.JwtDto;
 import com.futbolito.security.dto.UserLogin;
 import com.futbolito.security.dto.NewUser;

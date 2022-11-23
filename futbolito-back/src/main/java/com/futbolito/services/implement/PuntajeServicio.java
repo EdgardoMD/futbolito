@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.futbolito.modelo.entidades.Score;
+import com.futbolito.models.entidades.Score;
 import com.futbolito.services.interfaces.IPuntajeServicio;
 
 @Service

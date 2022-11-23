@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.futbolito.modelo.entidades.User;
-import com.futbolito.modelo.entidades.UserRole;
+import com.futbolito.models.entidades.User;
+import com.futbolito.models.entidades.UserRole;
 import com.futbolito.repository.IRoleRepository;
 import com.futbolito.repository.IUserRepository;
 import com.futbolito.repository.IUserRoleRepository;

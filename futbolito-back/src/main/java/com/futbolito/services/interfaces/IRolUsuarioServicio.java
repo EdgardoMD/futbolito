@@ -1,7 +1,7 @@
 package com.futbolito.services.interfaces;
 
 
-import com.futbolito.modelo.entidades.Role;
+import com.futbolito.models.entidades.Role;
 
 public interface IRolUsuarioServicio extends ICRUD<Role>{
 	

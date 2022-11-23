@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.futbolito.modelo.entidades.StatusReservationRequest;
+import com.futbolito.models.entidades.StatusReservationRequest;
 import com.futbolito.services.interfaces.IEstadoSolicitudServicio;
 
 @Service

@@ -5,8 +5,8 @@ import java.util.Set;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.futbolito.modelo.entidades.IDUserRole;
-import com.futbolito.modelo.entidades.UserRole;
+import com.futbolito.models.entidades.IDUserRole;
+import com.futbolito.models.entidades.UserRole;
 
 public interface IUserRoleRepository extends JpaRepository<UserRole, IDUserRole> {
 

@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.futbolito.modelo.entidades.User;
+import com.futbolito.models.entidades.User;
 import com.futbolito.repository.IUserRoleRepository;
 import com.futbolito.security.entity.MainUser;
 import com.futbolito.services.interfaces.IUsuarioServicio;

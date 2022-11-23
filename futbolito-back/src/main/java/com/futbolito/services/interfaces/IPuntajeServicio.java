@@ -1,6 +1,6 @@
 package com.futbolito.services.interfaces;
 
-import com.futbolito.modelo.entidades.Score;
+import com.futbolito.models.entidades.Score;
 
 public interface IPuntajeServicio extends ICRUD<Score> {
 

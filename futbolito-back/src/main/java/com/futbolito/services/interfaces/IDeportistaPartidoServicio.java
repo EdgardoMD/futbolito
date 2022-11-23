@@ -1,6 +1,6 @@
 package com.futbolito.services.interfaces;
 
-import com.futbolito.modelo.entidades.AthleteMatch;
+import com.futbolito.models.entidades.AthleteMatch;
 
 public interface IDeportistaPartidoServicio extends ICRUD<AthleteMatch> {
 

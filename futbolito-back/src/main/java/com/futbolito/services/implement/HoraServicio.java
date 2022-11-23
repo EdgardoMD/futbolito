@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.futbolito.modelo.entidades.Hour;
+import com.futbolito.models.entidades.Hour;
 import com.futbolito.services.interfaces.IHoraServicio;
 
 @Service

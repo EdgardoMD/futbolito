@@ -1,6 +1,6 @@
 package com.futbolito.services.interfaces;
 
-import com.futbolito.modelo.entidades.LevelAthlete;
+import com.futbolito.models.entidades.LevelAthlete;
 
 public interface INivelDeportistaServicio extends ICRUD<LevelAthlete> {
 
