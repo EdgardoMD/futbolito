@@ -10,4 +10,10 @@ class FutbolitoApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	void imprimirSystemProperties() {
+		Properties properties = System.getProperties();
+		properties.forEach((k, v) -> System.out.println(k + ": " + v));
+	}
+
 }
