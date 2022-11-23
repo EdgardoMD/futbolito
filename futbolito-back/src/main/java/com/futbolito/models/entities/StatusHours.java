@@ -1,4 +1,4 @@
-package com.futbolito.models.entidades;
+package com.futbolito.models.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,16 +13,16 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="regions")
-public class Region {
-	
+@Table(name="status_hours")
+public class StatusHours {
+
 	@Id
-	@Column(name="ID_REGION")
+	@Column(name="id_status_hours")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
 	private Long id;
 	
-	@Column(name="REGION")
-	private String region;
-
+	@Column(name="status")
+	private String status;
+	
 }

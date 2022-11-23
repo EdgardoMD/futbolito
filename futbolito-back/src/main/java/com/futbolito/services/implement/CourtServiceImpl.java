@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.futbolito.models.entidades.Court;
+import com.futbolito.models.entities.Court;
 import com.futbolito.services.interfaces.ICourtService;
 
 @Service

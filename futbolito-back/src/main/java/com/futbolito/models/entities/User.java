@@ -1,4 +1,4 @@
-package com.futbolito.models.entidades;
+package com.futbolito.models.entities;
 
 import java.util.HashSet;
 import java.util.Set;

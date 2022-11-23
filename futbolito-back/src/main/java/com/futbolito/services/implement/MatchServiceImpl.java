@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.futbolito.models.entidades.Match;
+import com.futbolito.models.entities.Match;
 import com.futbolito.services.interfaces.IMatchService;
 
 @Service

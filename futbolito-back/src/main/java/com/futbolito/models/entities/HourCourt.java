@@ -1,4 +1,4 @@
-package com.futbolito.models.entidades;
+package com.futbolito.models.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,33 +11,29 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Table(name="athletes_matchs")
-public class AthleteMatch {
+@Table(name="hours_courts")
+public class HourCourt {
 	
 	@Id
-	@Column(name="id_athlete_match")
+	@Column(name="id_hour_courts")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-	private Long idAthleteMatch;
+	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name="id_match")
-	private Match match;
+	@JoinColumn(name="id_status_hours")
+	private StatusHours statusHours;
 	
 	@ManyToOne
-	@JoinColumn(name="id_team")
-	private Team team;
+	@JoinColumn(name="id_hour")
+	private Hour hour;
 	
 	@ManyToOne
-	@JoinColumn(name="id_athete")
-	private Athlete athlete;
-	
+	@JoinColumn(name="id_court")
+	private Court court;
+
 }

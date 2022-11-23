@@ -1,4 +1,4 @@
-package com.futbolito.models.entidades;
+package com.futbolito.models.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -20,24 +19,22 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="qualifications_teams")
-public class QualificationTeam {
+@Table(name="citys")
+public class City {
+	
 	
 	@Id
-	@Column(name="id_qualification_team")
+	@Column(name="id_city")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-	private Long idQualificationTeam;
+	private Long idCity;
 	
-	@OneToOne
-	@JoinColumn(name="match")
-	private Match match;
+	
+	@Column(name="city")
+	private String city;
 	
 	@ManyToOne
-	@JoinColumn(name="team")
-	private Team team;
-	
-	@Column(name="comment")
-	private String comment;
+	@JoinColumn(name="ID_REGION")
+	private Region region;
 
 }

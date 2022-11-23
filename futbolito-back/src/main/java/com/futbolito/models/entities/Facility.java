@@ -1,4 +1,4 @@
-package com.futbolito.models.entidades;
+package com.futbolito.models.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,23 +9,37 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Table(name="groups")
-public class Group {
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name="facilitys")
+public class Facility {
 	
 	@Id
-	@Column(name="id_group")
+	@Column(name="is_facility")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-	private Long id;
+	private Long idFacilitys;
 	
-	@Column(name="score")
-	private int score;
-
 	@Column(name="name")
 	private String name;
+	
+	@Column(name="direction")
+	private String direction;
+	
+	@Column(name="location")
+	private String location;
+	
+	@Column(name="phone")
+	private String phone;
+	
+	@Column(name="RUT")
+	private String rut;
+
 
 }

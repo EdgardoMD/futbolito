@@ -1,4 +1,4 @@
-package com.futbolito.models.entidades;
+package com.futbolito.models.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,16 +13,19 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="status_reservation_requests")
-public class StatusReservationRequest {
+@Table(name="groups")
+public class Group {
 	
 	@Id
-	@Column(name="id_status_reservation_requests")
+	@Column(name="id_group")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
 	private Long id;
 	
-	@Column(name="status")
-	private String status;
+	@Column(name="score")
+	private int score;
+
+	@Column(name="name")
+	private String name;
 
 }

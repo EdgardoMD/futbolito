@@ -1,4 +1,4 @@
-package com.futbolito.models.entidades;
+package com.futbolito.models.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,30 +7,37 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
-@Table(name="athlete_comments")
-public class AthleteComment {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name="athletes_matchs")
+public class AthleteMatch {
 	
 	@Id
-	@Column(name="is_athlete_comments")
+	@Column(name="id_athlete_match")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-	private Long id;
+	private Long idAthleteMatch;
 	
 	@ManyToOne
-	@JoinColumn(name="id_athlete")
-	private Athlete athlete;
-	
-	@OneToOne
 	@JoinColumn(name="id_match")
 	private Match match;
 	
-	@Column(name="COMENTARIO")
-	private String comentario;
-
+	@ManyToOne
+	@JoinColumn(name="id_team")
+	private Team team;
+	
+	@ManyToOne
+	@JoinColumn(name="id_athete")
+	private Athlete athlete;
+	
 }

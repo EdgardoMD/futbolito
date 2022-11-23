@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.futbolito.models.entidades.User;
-import com.futbolito.models.entidades.UserRole;
+import com.futbolito.models.entities.User;
+import com.futbolito.models.entities.UserRole;
 import com.futbolito.repository.IRoleRepository;
 import com.futbolito.repository.IUserRepository;
 import com.futbolito.repository.IUserRoleRepository;
@@ -76,9 +76,9 @@ public class UserServiceImpl implements IUserService {
 
 		User user = new User();
 		user.setMail(nuevoUsuario.getEmail());
-		user.setName(nuevoUsuario.getNombre());
+		user.setName(nuevoUsuario.getName());
 		user.setPassword( passwordEncoder.encode(nuevoUsuario.getPassword()));
-		user.setPhone(nuevoUsuario.getTelefono());
+		user.setPhone(nuevoUsuario.getPhone());
 		User registeredUser = save(user);
 		UserRole rolUsuario = new UserRole();
 		rolUsuario.setUser(registeredUser);

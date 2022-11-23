@@ -1,1 +1,37 @@
-registro
+registrossssss
+<div>
+    <form #f="ngForm" (ngSubmit)="onRegister()" novalidate>
+       
+        <div>
+            <label for="password">nombre</label>
+            <input type="text" name="name" id="name" [(ngModel)]="name" required>
+        </div>
+        <div>
+            <label for="password">apellido</label>
+            <input type="text" name="lastName" id="lastName" [(ngModel)]="lastName" required>
+        </div>
+        <div>
+            <label for="password">nick</label>
+            <input type="text" name="nickname" id="nickname" [(ngModel)]="nickname" required>
+        </div>
+        <div>
+            <label for="password">telefono</label>
+            <input type="tel" name="phone" id="phone" [(ngModel)]="phone" >
+        </div>
+        <div>
+            <label for="nombreUsuario">Email</label>
+            <input type="email" name="email" id="email" [(ngModel)]="email" required>
+        </div>
+        <div>
+            <label for="password">contraseña</label>
+            <input type="password" name="password" id="password" [(ngModel)]="password" required>
+        </div>
+        <div>
+            <label for="password">contraseña</label>
+            <input type="password" name="confirmationPassword" id="confirmationPassword" [(ngModel)]="confirmationPassword" required>
+        </div>
+        <div>
+            <button type="submit" [disabled]="!f.valid">registrarse</button>
+        </div>
+    </form>
+</div>

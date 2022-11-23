@@ -29,21 +29,14 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain filterChain) throws ServletException, IOException {
         try {
-        	System.out.println("llego a dofilter");
             String token = getToken(req);
-            System.out.println("llego a 1 dofilter");
             if(token != null && jwtProvider.validateToken(token)){
-            	System.out.println("llego a 2  dofilter");
                 String nombreUsuario = jwtProvider.getNombreUsuarioFromToken(token);
-                System.out.println("llego a 3  dofilter");
                 UserDetails userDetails = userDetailsService.loadUserByUsername(nombreUsuario);
-                System.out.println("llego a 4  dofilter");
 
                 UsernamePasswordAuthenticationToken auth =
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                System.out.println("llego a 5  dofilter");
                 SecurityContextHolder.getContext().setAuthentication(auth);
-                System.out.println("llego a 6  dofilter");
             }
         } catch (Exception e){
             logger.error("fail en el método doFilter " + e.getMessage());

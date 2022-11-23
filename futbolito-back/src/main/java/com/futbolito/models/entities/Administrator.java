@@ -1,4 +1,4 @@
-package com.futbolito.models.entidades;
+package com.futbolito.models.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,33 +7,35 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Table(name="hours_courts")
-public class HourCourt {
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name="administrators")
+public class Administrator {
 	
 	@Id
-	@Column(name="id_hour_courts")
+	@Column(name="is_administrator")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-	private Long id;
+	private Long idAdministrator;
+	
+	@OneToOne
+	@JoinColumn(name="is_user")
+	private User user;
 	
 	@ManyToOne
-	@JoinColumn(name="id_status_hours")
-	private StatusHours statusHours;
-	
-	@ManyToOne
-	@JoinColumn(name="id_hour")
-	private Hour hour;
-	
-	@ManyToOne
-	@JoinColumn(name="id_court")
-	private Court court;
+	@JoinColumn(name="ID_facility")
+	private Facility facility;
+
 
 }

@@ -13,15 +13,24 @@ import lombok.NoArgsConstructor;
 public class NewUser {
 	
     @NotBlank
-    private String nombre;
+    private String name;
     
     @NotBlank
-    private String telefono;
+    private String lastName;
+    
+    @NotBlank
+    private String nickname;
+    
+    @NotBlank
+    private String phone;
     
     @Email
     private String email;
     
     @NotBlank
     private String password;
+    
+    @NotBlank
+    private String confirmationPassword;
 
 }

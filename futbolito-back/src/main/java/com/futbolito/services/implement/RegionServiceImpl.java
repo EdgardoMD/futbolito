@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.futbolito.models.entidades.Region;
+import com.futbolito.models.entities.Region;
 import com.futbolito.services.interfaces.IRegionService;
 
 @Service

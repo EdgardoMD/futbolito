@@ -1,4 +1,4 @@
-package com.futbolito.models.entidades;
+package com.futbolito.models.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,30 +11,33 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Table(name="citys")
-public class City {
-	
+@Table(name="reservation_requests")
+public class ReservationRequest {
 	
 	@Id
-	@Column(name="id_city")
+	@Column(name="id_reservation_request")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-	private Long idCity;
-	
-	
-	@Column(name="city")
-	private String city;
+	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name="ID_REGION")
-	private Region region;
+	@JoinColumn(name="id_status_reser_req")
+	private StatusReservationRequest statusReservationRequest;
+	
+	@ManyToOne
+	@JoinColumn(name="id_hour")
+	private HourCourt hour;
+	
+	@ManyToOne
+	@JoinColumn(name="id_team1")
+	private Team team1;
+	
+	@ManyToOne
+	@JoinColumn(name="i_team2")
+	private Team team2;
 
 }
