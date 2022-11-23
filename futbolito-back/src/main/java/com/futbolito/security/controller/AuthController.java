@@ -16,7 +16,7 @@ import com.futbolito.security.dto.JwtDto;
 import com.futbolito.security.dto.UserLogin;
 import com.futbolito.security.dto.NewUser;
 import com.futbolito.security.jwt.JwtProvider;
-import com.futbolito.services.interfaces.IUsuarioServicio;
+import com.futbolito.services.interfaces.IUserService;
 
 import javax.validation.Valid;
 
@@ -29,7 +29,7 @@ public class AuthController {
 	private AuthenticationManager authenticationManager;
 
 	@Autowired
-	private IUsuarioServicio usuarioService;
+	private IUserService usuarioService;
 
 	@Autowired
 	JwtProvider jwtProvider;
@@ -41,7 +41,7 @@ public class AuthController {
 					HttpStatus.BAD_REQUEST);
 		if (usuarioService.existsByEmail(nuevoUsuario.getEmail()))
 			return new ResponseEntity<Message>(new Message("ese email ya existe"), HttpStatus.BAD_REQUEST);
-		usuarioService.crearNuevoUsuario(nuevoUsuario);
+		usuarioService.createNewUser(nuevoUsuario);
 		return new ResponseEntity<Message>(new Message("usuario guardado"), HttpStatus.CREATED);
 	}
 

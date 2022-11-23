@@ -9,20 +9,20 @@ import org.springframework.stereotype.Service;
 import com.futbolito.models.entidades.User;
 import com.futbolito.repository.IUserRoleRepository;
 import com.futbolito.security.entity.MainUser;
-import com.futbolito.services.interfaces.IUsuarioServicio;
+import com.futbolito.services.interfaces.IUserService;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private IUsuarioServicio usuarioSer;
+    private IUserService usuarioSer;
     
 	@Autowired
 	private IUserRoleRepository usuarioRolRepositorio;
 
     @Override
     public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException {
-        User usuario = usuarioSer.getByNombreUsuario(nombreUsuario).get();
+        User usuario = usuarioSer.getUserByUserName(nombreUsuario).get();
         usuario.setRoles( usuarioRolRepositorio.listRoleByUserId(usuario.getIdUser()));
         
         return MainUser.build(usuario);

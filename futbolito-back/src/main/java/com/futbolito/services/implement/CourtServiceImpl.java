@@ -4,32 +4,32 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.futbolito.models.entidades.Facility;
-import com.futbolito.services.interfaces.IFacilityService;
+import com.futbolito.models.entidades.Court;
+import com.futbolito.services.interfaces.ICourtService;
 
 @Service
-public class RecintoServicio implements IFacilityService {
+public class CourtServiceImpl implements ICourtService {
 
 	@Override
-	public Facility save(Facility obj) {
+	public Court save(Court obj) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Facility update(Facility obj) {
+	public Court update(Court obj) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Facility> toList() {
+	public List<Court> toList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Facility getById(Long id) {
+	public Court getById(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

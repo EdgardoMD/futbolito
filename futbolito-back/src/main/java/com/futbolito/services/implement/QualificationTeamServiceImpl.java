@@ -4,32 +4,32 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.futbolito.models.entidades.Facility;
-import com.futbolito.services.interfaces.IFacilityService;
+import com.futbolito.models.entidades.QualificationTeam;
+import com.futbolito.services.interfaces.IQualificationTeamService;
 
 @Service
-public class RecintoServicio implements IFacilityService {
+public class QualificationTeamServiceImpl implements IQualificationTeamService {
 
 	@Override
-	public Facility save(Facility obj) {
+	public QualificationTeam save(QualificationTeam obj) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Facility update(Facility obj) {
+	public QualificationTeam update(QualificationTeam obj) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Facility> toList() {
+	public List<QualificationTeam> toList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Facility getById(Long id) {
+	public QualificationTeam getById(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
