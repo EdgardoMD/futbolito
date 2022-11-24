@@ -55,5 +55,14 @@ export class LoginComponent implements OnInit {
     )
   }
 
+  logOut():void{
+    this.isLogged = false;
+    this.loginUsuario = {};
+    this.nombreUsuario = '';
+    this.password = '';
+    this.roles = [];
+    this.tokenService.logOut();
+  }
+
 
 }
