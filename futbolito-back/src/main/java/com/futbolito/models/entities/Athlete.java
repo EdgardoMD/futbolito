@@ -62,6 +62,12 @@ public class Athlete {
 	
 	@Column(name="profile_photo")
 	private String profilePhoto;
+
+	public Athlete(User user) {
+		this.user = user;
+	}
+	
+	
 	
 	
 	

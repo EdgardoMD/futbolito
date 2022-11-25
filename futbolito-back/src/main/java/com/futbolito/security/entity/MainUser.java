@@ -22,6 +22,7 @@ public class MainUser implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
     public MainUser(Long id, String name,  String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    	this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;

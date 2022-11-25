@@ -9,6 +9,7 @@ import { PerfilModule } from './perfil/perfil.module';
 import { HomeComponent } from './home/home.component';
 import { AutenticacionModule } from './autenticacion/autenticacion.module';
 import { FormsModule } from '@angular/forms';
+import { interceptorProvider } from './interceptors/token-intepcetor.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { FormsModule } from '@angular/forms';
     AutenticacionModule,
     FormsModule
   ],
-  providers: [],
+  providers: [interceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

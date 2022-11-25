@@ -1,13 +1,19 @@
 package com.futbolito.controller.profile;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.futbolito.models.DTOs.AthleteDto;
 import com.futbolito.models.entities.Athlete;
+import com.futbolito.security.entity.MainUser;
+import com.futbolito.services.interfaces.IAtheteTeamService;
+import com.futbolito.services.interfaces.IAthleteService;
 
 
 @CrossOrigin
@@ -15,21 +21,15 @@ import com.futbolito.models.entities.Athlete;
 @RequestMapping("profile")
 public class ProfileController {
 	
-	@GetMapping
-	public ResponseEntity<Athlete> getProfile(/* Authentication authentication*/){
+	@Autowired
+	private IAthleteService athleteService ;
+	
+	@GetMapping("/athlete")
+	public ResponseEntity<AthleteDto> getProfile( Authentication authentication){
 		
-		System.out.println("pide");
-		
-		Athlete dto = new Athlete();
-		dto.setIdAthlete(1l);
-		dto.setBirthDate("nacimiento");
-		dto.setHeight(1.70f);
-		dto.setProfilePhoto("link foto");
-		dto.setNick("nickiki");
-		
-		System.out.println(dto);
-		
-		return new ResponseEntity<Athlete>(dto, HttpStatus.OK);
+		Long idUser = ((MainUser)authentication.getPrincipal()).getId();
+		Athlete athlete = athleteService.findAthleteByUserId(idUser);
+		return new ResponseEntity<AthleteDto>(new AthleteDto(athlete), HttpStatus.OK);
 	}
 
 }

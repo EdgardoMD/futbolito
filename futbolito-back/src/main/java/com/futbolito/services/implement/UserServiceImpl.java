@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.futbolito.models.entities.Athlete;
 import com.futbolito.models.entities.User;
 import com.futbolito.models.entities.UserRole;
+import com.futbolito.repository.IAthleteRepository;
 import com.futbolito.repository.IRoleRepository;
 import com.futbolito.repository.IUserRepository;
 import com.futbolito.repository.IUserRoleRepository;
@@ -28,6 +30,8 @@ public class UserServiceImpl implements IUserService {
 	private IRoleRepository rolRep;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private IAthleteRepository athleteRepository;
 	
 	private static final int ID_ROL_DEPORTISTA = 1; //esto deberiamos cambiarlo, esta muy acoplado al codigo
 
@@ -84,6 +88,7 @@ public class UserServiceImpl implements IUserService {
 		rolUsuario.setUser(registeredUser);
 		rolUsuario.setRole(rolRep.findById(ID_ROL_DEPORTISTA).get());
 		UsuarioRolRep.save(rolUsuario);
+		athleteRepository.save(new Athlete(user));
 		return UsuarioRep.findById(registeredUser.getIdUser()).get();
 	}
 

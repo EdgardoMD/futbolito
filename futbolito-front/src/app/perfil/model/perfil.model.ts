@@ -1,24 +1,15 @@
 export class Perfil {
 
-    id?: number;
-	
-	usuario?: number;
-
-	nivelDeportista?: number;
-	
-	ciudad?: String;
-	
-	estatura?: number;
-	
-	peso?: number;
-	
-	posicion?: String;
-	
-	pie?: String;
-	
-	nacimiento?: String;
-	
-	nick?: String;
-	
-    fotoPerfil?: String;
+	athleteLevel?: string;
+	birthDate?: string;
+	city?: string;
+	height?: string;
+	mail?: string;
+	name?: string;
+	nick?: string;
+	phone?: string;
+	position?: string;
+	profilePhoto?: string;
+	skillfulFoot?: string;
+	weight?: string;
 }

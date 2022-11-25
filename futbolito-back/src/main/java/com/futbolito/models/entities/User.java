@@ -34,7 +34,6 @@ public class User {
 	@GenericGenerator(name = "native", strategy = "native")
 	private Long idUser;
 
-
 	@Column(name = "PASSWORD")
 	private String password;
 
