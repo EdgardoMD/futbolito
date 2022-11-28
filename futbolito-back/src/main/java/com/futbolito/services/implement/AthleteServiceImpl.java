@@ -1,21 +1,27 @@
 package com.futbolito.services.implement;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.futbolito.models.entities.Athlete;
+import com.futbolito.models.entities.User;
 import com.futbolito.repository.IAthleteRepository;
+import com.futbolito.repository.IUserRepository;
 import com.futbolito.services.interfaces.IAthleteService;
+
+import javassist.NotFoundException;
 
 @Service
 public class AthleteServiceImpl implements IAthleteService {
-	
+
 	@Autowired
 	private IAthleteRepository athleteRepository;
-	
-	
+
+	@Autowired
+	private IUserRepository userRepository;
 
 	@Override
 	public Athlete save(Athlete obj) {
@@ -48,8 +54,22 @@ public class AthleteServiceImpl implements IAthleteService {
 	}
 
 	@Override
-	public Athlete findAthleteByUserId(Long id) {
-		Athlete athlete = athleteRepository.findByUserId(id).orElseThrow();
+	public Athlete findAthleteByUserId(Long id) throws NotFoundException {
+		Athlete athlete = null;
+
+		Optional<Athlete> athleteOptional = athleteRepository.findByUserId(id);
+		if (athleteOptional.isPresent()) {
+			athlete = athleteOptional.get();
+		} else {
+			Optional<User> userOptional = userRepository.findById(id);
+			if (userOptional.isPresent()) {
+				athlete = new Athlete();
+				athlete.setUser(userOptional.get());
+			} else {
+				throw new NotFoundException("no se encontro usuario con este id");
+			}
+
+		}
 		return athlete;
 	}
 
