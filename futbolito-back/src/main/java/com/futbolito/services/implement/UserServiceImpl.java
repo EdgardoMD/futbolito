@@ -23,7 +23,7 @@ import com.futbolito.services.interfaces.IUserService;
 public class UserServiceImpl implements IUserService {
 
 	@Autowired
-	private IUserRepository UsuarioRep;
+	private IUserRepository usuarioRep;
 	@Autowired
 	private IUserRoleRepository UsuarioRolRep;
 	@Autowired
@@ -37,7 +37,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public User save(User obj) {
-		return UsuarioRep.save(obj);
+		return usuarioRep.save(obj);
 	}
 
 	@Override
@@ -65,31 +65,37 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public Optional<User> getUserByUserName(String nombreUsuario) {
-		return UsuarioRep.findByMail(nombreUsuario);
+	public Optional<User> getUserByNickName(String nickName) {
+		return usuarioRep.findByNickName(nickName);
 	}
 
 	@Override
 	public boolean existsByEmail(String email) {
-		return UsuarioRep.existsByMail(email);
+		return usuarioRep.existsByMail(email);
 	}
 
 	@Override
 	@Transactional
-	public User createNewUser(NewUser nuevoUsuario) {
+	public User createNewUser(NewUser newUser) {
 
 		User user = new User();
-		user.setMail(nuevoUsuario.getEmail());
-		user.setName(nuevoUsuario.getName());
-		user.setPassword( passwordEncoder.encode(nuevoUsuario.getPassword()));
-		user.setPhone(nuevoUsuario.getPhone());
+		user.setMail(newUser.getEmail());
+		user.setName(newUser.getName());
+		user.setPassword( passwordEncoder.encode(newUser.getPassword()));
+		user.setPhone(newUser.getPhone());
+		user.setNickName(newUser.getNickname());
 		User registeredUser = save(user);
 		UserRole rolUsuario = new UserRole();
 		rolUsuario.setUser(registeredUser);
 		rolUsuario.setRole(rolRep.findById(ID_ROL_DEPORTISTA).get());
 		UsuarioRolRep.save(rolUsuario);
 		athleteRepository.save(new Athlete(user));
-		return UsuarioRep.findById(registeredUser.getIdUser()).get();
+		return usuarioRep.findById(registeredUser.getIdUser()).get();
+	}
+
+	@Override
+	public boolean existsByNickName(String nickName) {
+		return usuarioRep.existsByNickName(nickName);
 	}
 
 }

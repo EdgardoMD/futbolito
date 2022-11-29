@@ -8,9 +8,11 @@ import com.futbolito.security.dto.NewUser;
 public interface IUserService extends ICRUD<User> {
 	
 	
-	public Optional<User> getUserByUserName(String userName);
+	public Optional<User> getUserByNickName(String userName);
 
     public boolean existsByEmail(String email);
+    
+    public boolean existsByNickName(String nickName);
     
     public User createNewUser(NewUser newUser);
 

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginUsuario } from '../../models/login-usuario';
 import { NewUser } from '../../models/new-user';
 import { AutenticacionService } from '../../services/autenticacion.service';
-import { TokenService } from '../../services/token.service';
 
   
 
@@ -27,7 +25,6 @@ export class RegistroComponent implements OnInit {
   confirmationPassword: string = '';
 
   constructor(
-    private tokenService: TokenService,
     private autenticacionService: AutenticacionService,
     private router: Router
   ) { }
@@ -48,3 +45,5 @@ export class RegistroComponent implements OnInit {
   }
 
 }
+
+

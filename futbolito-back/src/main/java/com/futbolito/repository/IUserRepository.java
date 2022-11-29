@@ -8,7 +8,10 @@ import com.futbolito.models.entities.User;
 
 public interface IUserRepository extends JpaRepository<User, Long> {
 	
-	Optional<User> findByMail(String userName);
+	Optional<User> findByNickName(String nickName);
     boolean existsByMail(String email);
+    boolean existsByNickName(String nickName);
 
+    
+    
 }

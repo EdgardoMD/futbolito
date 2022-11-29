@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { RegistroComponent } from './autenticacion/components/registro/registro.component';
 import { LoginComponent } from './autenticacion/components/login/login.component';
+import { ListMyTeamsComponent } from './modules/teams/components/list-my-teams/list-my-teams.component';
+import { NewTeamComponent } from './modules/teams/components/new-team/new-team.component';
 
 const routes: Routes = [
   {
@@ -25,6 +27,14 @@ const routes: Routes = [
   {
     path: 'registro',
     component: RegistroComponent
+  },
+  {
+    path: 'my-teams',
+    component: ListMyTeamsComponent
+  },
+  {
+    path: 'new-team',
+    component: NewTeamComponent
   }
 ];
 

@@ -23,7 +23,7 @@ public class JwtProvider {
 
     public String generateToken(Authentication authentication){
         MainUser usuarioPrincipal = (MainUser) authentication.getPrincipal();
-        return Jwts.builder().setSubject(usuarioPrincipal.getUsername())
+        return Jwts.builder().setSubject(usuarioPrincipal.getNick())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + expiration * 1000))
                // .setId("1")

@@ -37,5 +37,9 @@ public class Team {
 
 	@Column(name="name")
 	private String name;
+	
+	@ManyToOne
+	@JoinColumn(name="id_city")
+	private City city;
 
 }

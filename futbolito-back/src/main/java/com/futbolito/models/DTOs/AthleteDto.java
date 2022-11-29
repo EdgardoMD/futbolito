@@ -31,7 +31,7 @@ public class AthleteDto {
 		 position = athlete.getPosition()  ;
 		 skillfulFoot = athlete.getSkillfulFoot()  ;
 		 birthDate = athlete.getBirthDate()  ;
-		 nick = athlete.getNick()  ;
+		 nick = athlete.getUser().getNickName()  ;
 		 profilePhoto = athlete.getProfilePhoto()  ;
 		 phone = athlete.getUser().getPhone()  ;
 		 name = athlete.getUser().getName()  ;

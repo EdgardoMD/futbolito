@@ -4,7 +4,7 @@ export class JWTDTO {
     
     bearer = "Bearer";
     
-    nombreUsuario?: string;
+    username?: string;
     
     authorities?: string[];
 }

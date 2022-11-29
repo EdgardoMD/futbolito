@@ -45,6 +45,9 @@ public class User {
 
 	@Column(name = "MAIL")
 	private String mail;
+	
+	@Column(name = "nick_name")
+	private String nickName;
 
 	@JsonIgnore
 	@Transient

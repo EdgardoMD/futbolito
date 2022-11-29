@@ -41,6 +41,8 @@ public class AuthController {
 					HttpStatus.BAD_REQUEST);
 		if (usuarioService.existsByEmail(nuevoUsuario.getEmail()))
 			return new ResponseEntity<Message>(new Message("ese email ya existe"), HttpStatus.BAD_REQUEST);
+		if (usuarioService.existsByNickName(nuevoUsuario.getNickname()))
+			return new ResponseEntity<Message>(new Message("ese nick ya existe"), HttpStatus.BAD_REQUEST);
 		usuarioService.createNewUser(nuevoUsuario);
 		return new ResponseEntity<Message>(new Message("usuario guardado"), HttpStatus.CREATED);
 	}

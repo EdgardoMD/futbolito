@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         this.isLogged = true;
         this.isLoginFail = false;
         this.tokenService.setToken(data.token as string);
-        this.tokenService.setUserName(data.nombreUsuario as string);
+        this.tokenService.setUserName(data.username as string);
         this.tokenService.setAuthorities(data.authorities as string[]);
         this.roles = data.authorities as string [];
       },

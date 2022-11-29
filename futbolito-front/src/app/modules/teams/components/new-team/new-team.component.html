@@ -1,0 +1,20 @@
+<p>new-team works!</p>
+<div>
+  
+        <form #f="ngForm" (ngSubmit)="createNewTeam()">
+
+            <div>
+                <label >nombre</label>
+                <input type="text" name="name" id="name" [(ngModel)]="name" required>
+            </div>
+            <div>
+                <label >ciudad</label>
+                <input type="number" name="idCity" id="idCity" [(ngModel)]="idCity" required>
+            </div>
+
+
+
+            <button type="submit" >crear equipo</button>
+        </form>
+
+</div>

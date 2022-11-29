@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { AutenticacionModule } from './autenticacion/autenticacion.module';
 import { FormsModule } from '@angular/forms';
 import { interceptorProvider } from './interceptors/token-intepcetor.service';
+import { TeamsModule } from './modules/teams/teams.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { interceptorProvider } from './interceptors/token-intepcetor.service';
     AppRoutingModule,
     PerfilModule,
     AutenticacionModule,
-    FormsModule
+    FormsModule,
+    TeamsModule
   ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent]

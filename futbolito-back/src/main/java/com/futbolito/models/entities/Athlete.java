@@ -57,9 +57,6 @@ public class Athlete {
 	@Column(name="birth_date")
 	private String birthDate;
 	
-	@Column(name="NICK")
-	private String nick;
-	
 	@Column(name="profile_photo")
 	private String profilePhoto;
 

@@ -19,13 +19,15 @@ public class MainUser implements UserDetails {
     private String name;
     private String email;
     private String password;
+    private String nick;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public MainUser(Long id, String name,  String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public MainUser(Long id, String name,  String email, String password, String nick, Collection<? extends GrantedAuthority> authorities) {
     	this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.nick = nick;
         this.authorities = authorities;
     }
 
@@ -37,7 +39,7 @@ public class MainUser implements UserDetails {
     	}
         
         
-        return new MainUser(user.getIdUser(), user.getName(),  user.getMail(), user.getPassword(), authorities);
+        return new MainUser(user.getIdUser(), user.getName(),  user.getMail(), user.getPassword(),user.getNickName(), authorities);
     }
 
     @Override
@@ -52,7 +54,7 @@ public class MainUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return nick;
     }
 
     @Override
@@ -85,6 +87,10 @@ public class MainUser implements UserDetails {
 
 	public Long getId() {
 		return id;
+	}
+
+	public String getNick() {
+		return nick;
 	}
     
     
