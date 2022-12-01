@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { Team } from '../../models/team';
 import { TeamsService } from '../../services/teams.service';
 
@@ -10,9 +11,11 @@ import { TeamsService } from '../../services/teams.service';
 export class ListMyTeamsComponent implements OnInit {
 
   teams: Team[] = [];
+  idTeam : number = 0;
 
   constructor(
-    private teamService : TeamsService
+    private teamService : TeamsService,
+    private router : Router
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +30,13 @@ export class ListMyTeamsComponent implements OnInit {
       
     }
    )
+  }
+
+  viewMyTeam(idTeam:any){
+    this.idTeam = idTeam;
+    console.log("id que llega al componente list = " + this.idTeam)
+    this.teamService.setIdMyTeam(this.idTeam);
+    this.router.navigate(['my-team']);
   }
 
 }

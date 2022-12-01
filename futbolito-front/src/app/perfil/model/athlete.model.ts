@@ -1,5 +1,7 @@
-export class Perfil {
+export class Athlete {
 
+	idAthlete?: number;
+	IdUser?: number;
 	athleteLevel?: string;
 	birthDate?: string;
 	city?: string;

@@ -1,1 +1,39 @@
-<p>list-my-teams works!</p>
+<h1>MIS EQUIPOS</h1>
+
+
+
+<table>
+    <tr>
+        <th>
+            nombre 
+        </th>
+        <th>
+            ciudad
+        </th>
+        <th>
+            puntaje
+        </th>
+        <th>
+            nivel
+        </th>
+        <th></th>
+    </tr>
+    <tr *ngFor="let team of teams;">
+        <td>
+            {{team.name}}
+        </td>
+        <td>
+            {{team.city}}
+        </td>
+        <td>
+            {{team.score}}
+        </td>
+        <td>
+            {{team.teamLevel}}
+        </td>
+        <td>
+            <button (click)="viewMyTeam(team.id)">ver equipo</button>
+        </td>
+
+    </tr>
+</table>

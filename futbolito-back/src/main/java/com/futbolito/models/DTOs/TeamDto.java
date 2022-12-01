@@ -1,5 +1,7 @@
 package com.futbolito.models.DTOs;
 
+import java.util.List;
+
 import com.futbolito.models.entities.Team;
 
 import lombok.AllArgsConstructor;
@@ -18,6 +20,7 @@ public class TeamDto {
 	private String name;
 	private String city;
 	private Long idCity;
+	private List<Long> idsAtletes;
 	
 	public TeamDto(Team team) {
 		this.id = team.getId()  ;

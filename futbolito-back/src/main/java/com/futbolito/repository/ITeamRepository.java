@@ -10,7 +10,7 @@ import com.futbolito.models.entities.Team;
 
 public interface ITeamRepository extends JpaRepository<Team, Long> {
 
-	@Query(value = "select * from teams where id_teams = (select id_teams from athletes_teams where id_athlete = (select id_athletes  from athletes where id_user = :id_user))", nativeQuery = true)
+	@Query(value = "select * from teams where id_teams in (select id_teams from athletes_teams where id_athlete = (select id_athletes  from athletes where id_user = :id_user))", nativeQuery = true)
 	List<Team> listTeamsByIdUser(@Param("id_user") Long idUser);
 
 }

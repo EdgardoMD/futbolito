@@ -1,7 +1,6 @@
 package com.futbolito.services.implement;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -9,13 +8,16 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.futbolito.models.DTOs.AthleteDto;
 import com.futbolito.models.DTOs.TeamDto;
+import com.futbolito.models.DTOs.TeamWihtAthletesDto;
 import com.futbolito.models.entities.Athlete;
 import com.futbolito.models.entities.AthleteTeam;
 import com.futbolito.models.entities.City;
 import com.futbolito.models.entities.LevelTeam;
 import com.futbolito.models.entities.Team;
 import com.futbolito.repository.IAtheteTeamRepository;
+import com.futbolito.repository.IAthleteRepository;
 import com.futbolito.repository.ICityRepository;
 import com.futbolito.repository.ILevelTeamRepository;
 import com.futbolito.repository.ITeamRepository;
@@ -37,34 +39,32 @@ public class TeamServiceImpl implements ITeamService {
 	
 	@Autowired
 	private IAtheteTeamRepository atheteTeamRepository;
+	
+	@Autowired
+	private IAthleteRepository athleteRepository;
 
 	@Override
 	public Team save(Team obj) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Team update(Team obj) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<Team> toList() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Team getById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return teamRepository.findById(id).orElseThrow();
 	}
 
 	@Override
 	public boolean delete(Long id) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -92,8 +92,9 @@ public class TeamServiceImpl implements ITeamService {
 	@Override
 	public List<TeamDto> getTeamsByIdUser(Long idUser) throws NotFoundException {
 		List<Team> teams =  teamRepository.listTeamsByIdUser(idUser) ;
-		List<TeamDto> teamDtos = new ArrayList<>();
+		List<TeamDto> teamDtos;
 		if(teams != null) {
+			teamDtos = new ArrayList<>(teams.size());
 			for(Team team: teams) {
 				teamDtos.add(new TeamDto(team));
 			}
@@ -101,6 +102,36 @@ public class TeamServiceImpl implements ITeamService {
 			throw new NotFoundException("no se encontraron equipos asociados a este athleta");
 		}
 		return teamDtos;
+	}
+
+	@Override
+	public TeamWihtAthletesDto getMyTeamById(Long idTeam) {
+		Team team = this.getById(idTeam);
+		List<Athlete> athletes = athleteRepository.getAthletesByIdTeams(idTeam);
+		TeamDto teamDto = new TeamDto(team);
+		List<AthleteDto> athleteDtos;
+		TeamWihtAthletesDto teamWhitAthletesDto;
+		if(athletes!= null && !athletes.isEmpty()) {
+			athleteDtos = new ArrayList<>(athletes.size());
+			for(Athlete athlete :athletes) {
+				athleteDtos.add(new AthleteDto(athlete));
+			}
+			teamWhitAthletesDto = new TeamWihtAthletesDto(teamDto, athleteDtos);
+		} else {
+			teamWhitAthletesDto = new TeamWihtAthletesDto(teamDto);
+		}
+		return teamWhitAthletesDto;
+	}
+	
+	@Override
+	public Boolean belongsToTheTeam(Long idUser, TeamWihtAthletesDto athletesDtos) {
+		List<AthleteDto> athletes = athletesDtos.getAthleteDto();
+		for (AthleteDto athlete: athletes) {
+			if(athlete.getIdUser() == idUser) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 

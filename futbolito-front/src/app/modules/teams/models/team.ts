@@ -7,6 +7,7 @@ export class Team {
     city?: string;
     idTeamLevel?: number;
     idCity?: number;
+    idsAthletes?: number[];
 
 
     constructor(name?: string, idCity?: number) {

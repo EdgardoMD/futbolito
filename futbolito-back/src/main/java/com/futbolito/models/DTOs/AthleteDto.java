@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AthleteDto {
 	
+	private Long idAthlete;
+	private Long IdUser;
 	private String athleteLevel;
 	private String city;
 	private float height;
@@ -26,6 +28,8 @@ public class AthleteDto {
 	
 	public AthleteDto(Athlete athlete) {
 		
+		idAthlete = athlete.getIdAthlete();
+		IdUser = athlete.getUser().getIdUser();
 		 height = athlete.getHeight()  ;
 		 weight = athlete.getWeight()  ;
 		 position = athlete.getPosition()  ;

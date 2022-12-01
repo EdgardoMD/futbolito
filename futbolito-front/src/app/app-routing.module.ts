@@ -5,6 +5,7 @@ import { RegistroComponent } from './autenticacion/components/registro/registro.
 import { LoginComponent } from './autenticacion/components/login/login.component';
 import { ListMyTeamsComponent } from './modules/teams/components/list-my-teams/list-my-teams.component';
 import { NewTeamComponent } from './modules/teams/components/new-team/new-team.component';
+import { MyTeamComponent } from './modules/teams/components/my-team/my-team.component';
 
 const routes: Routes = [
   {
@@ -35,7 +36,16 @@ const routes: Routes = [
   {
     path: 'new-team',
     component: NewTeamComponent
+  },
+  {
+    path: 'my-team',
+    component: MyTeamComponent
   }
+
+
+
+
+  
 ];
 
 @NgModule({

@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.futbolito.models.DTOs.TeamDto;
+import com.futbolito.models.DTOs.TeamWihtAthletesDto;
 import com.futbolito.models.entities.Athlete;
 import com.futbolito.security.entity.MainUser;
 import com.futbolito.services.interfaces.IAthleteService;
@@ -54,6 +56,21 @@ public class teamController {
 			return new ResponseEntity<List<TeamDto>>(teamDtos, HttpStatus.OK);
 		} catch (NotFoundException e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+		}
+	}
+	
+	@GetMapping("/my-team")
+	public ResponseEntity<TeamWihtAthletesDto> getMyTeam(@RequestParam Long idTeam,  Authentication authentication){
+		Long idUser = ((MainUser) authentication.getPrincipal()).getId();
+		try {
+			TeamWihtAthletesDto athletesDtos = teamService.getMyTeamById(idTeam);
+			if(teamService.belongsToTheTeam(idUser, athletesDtos)) {
+				return new ResponseEntity<TeamWihtAthletesDto>(athletesDtos, HttpStatus.OK);
+			} else {
+				throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
 		}
 	}
 	
