@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @AllArgsConstructor
- @NoArgsConstructor
+@NoArgsConstructor
 @Table(name="athletes")
 public class Athlete {
 	

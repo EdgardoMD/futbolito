@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Athlete } from 'src/app/perfil/model/athlete.model';
+import { Team } from '../../models/team';
 import { TeamWithAthletes } from '../../models/team-with-athletes';
+import { AthleteService } from '../../services/athlete.service';
 import { TeamsService } from '../../services/teams.service';
 
 @Component({
@@ -10,27 +14,51 @@ import { TeamsService } from '../../services/teams.service';
 export class MyTeamComponent implements OnInit {
 
   idMyTeam : number = 0;
-  team: TeamWithAthletes = {};
+  team: TeamWithAthletes =  {teamDto:{}, athletesDto:[]};
+  athletesFound: Athlete[] = [];
+  public search: string = '';
 
   constructor(
-    private teamService : TeamsService
+    private teamService : TeamsService,
+    private athleteService : AthleteService,
+    private router : Router
   ) { }
 
   ngOnInit(): void {
-   this. getMyTeams();
-   
+    this. getMyTeams();
   }
 
   getMyTeams(){
     this.idMyTeam = this.teamService.idMyTeam;
-   this.teamService.getMyTeam(this.idMyTeam).subscribe(
-    myTeam => {
-      this.team = myTeam;
-      console.log(this.team);
+    
+    if(this.idMyTeam != 0 ){
+      this.teamService.getMyTeam(this.idMyTeam).subscribe(
+        team => {
+          this.team = team;
+        }
+       )
+    } else {
+      this.router.navigate(['my-teams']);
     }
-   )
-  
-
   }
 
+  searchAthlete(nick: any) :void {
+    if(this.search.length > 3){
+      this.athleteService.searchAthleteByNick(nick).subscribe(
+        athletes => {
+          this.athletesFound = athletes
+        }
+       )
+    }
+  }
+
+  inviteMyTeam(idTeam : any, idAthele: any ){
+    console.log("entro")
+    this.teamService.createdInvitationMyTeam( idTeam , idAthele).subscribe(
+      response => {
+        console.log("responde = "  + response)
+      }
+    )
+  }
+ 
 }

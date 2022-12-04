@@ -125,7 +125,7 @@ public class TeamServiceImpl implements ITeamService {
 	
 	@Override
 	public Boolean belongsToTheTeam(Long idUser, TeamWihtAthletesDto athletesDtos) {
-		List<AthleteDto> athletes = athletesDtos.getAthleteDto();
+		List<AthleteDto> athletes = athletesDtos.getAthletesDto();
 		for (AthleteDto athlete: athletes) {
 			if(athlete.getIdUser() == idUser) {
 				return true;

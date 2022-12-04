@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Athlete } from 'src/app/perfil/model/athlete.model';
 import { environment } from 'src/environments/environment';
 import { Team } from '../models/team';
 import { TeamWithAthletes } from '../models/team-with-athletes';
@@ -32,6 +33,22 @@ export class TeamsService {
   public setIdMyTeam(idMyTeam: number){
     this.idMyTeam = idMyTeam;
   }
+
+  public createdInvitationMyTeam(idTeam :number, idGuest:number) : Observable<boolean>{
+    let body: any = {'idTeam' :idTeam, 'idGuest': idGuest};
+    return this.httpClient.post<boolean>(environment.apiUrl + '/invitation/created-invitation', body);
+  }
+
+
+
+
+
+
+
+
+  
+
+ 
 
 
 

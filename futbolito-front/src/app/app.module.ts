@@ -4,18 +4,17 @@ import { HttpClientModule} from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './component/header/header.component';
 import { PerfilModule } from './perfil/perfil.module';
 import { HomeComponent } from './home/home.component';
 import { AutenticacionModule } from './autenticacion/autenticacion.module';
 import { FormsModule } from '@angular/forms';
 import { interceptorProvider } from './interceptors/token-intepcetor.service';
 import { TeamsModule } from './modules/teams/teams.module';
+import { HeaderModule } from './modules/header/header.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     HomeComponent
   ],
   imports: [
@@ -25,7 +24,8 @@ import { TeamsModule } from './modules/teams/teams.module';
     PerfilModule,
     AutenticacionModule,
     FormsModule,
-    TeamsModule
+    TeamsModule,
+    HeaderModule
   ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent]

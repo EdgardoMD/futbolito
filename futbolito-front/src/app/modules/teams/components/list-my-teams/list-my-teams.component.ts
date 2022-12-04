@@ -34,7 +34,6 @@ export class ListMyTeamsComponent implements OnInit {
 
   viewMyTeam(idTeam:any){
     this.idTeam = idTeam;
-    console.log("id que llega al componente list = " + this.idTeam)
     this.teamService.setIdMyTeam(this.idTeam);
     this.router.navigate(['my-team']);
   }

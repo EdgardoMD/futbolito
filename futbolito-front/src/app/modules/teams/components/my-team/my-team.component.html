@@ -1,3 +1,61 @@
-<p>my-team works!</p>
+<h1>{{team.teamDto.name}}</h1>
 
-{{team}}
+<h3>{{team.teamDto.name}} </h3>
+<h3>{{team.teamDto.score}} </h3>
+<h3>{{team.teamDto.teamLevel}} </h3>
+
+
+<table>
+    <tr>
+        <th>
+            nick 
+        </th>
+        <th>
+            nombre
+        </th>
+        <th>
+            posicion 
+        </th>
+        <th>
+            nivel
+        </th>
+        <th></th>
+    </tr>
+    <tr *ngFor="let athlete of team.athletesDto;">
+        <td>
+            {{athlete.nick}}
+        </td>
+        <td>
+            {{athlete.name}}
+        </td>
+        <td>
+            {{athlete.position}}
+        </td>
+        <td>
+            {{athlete.athleteLevel}}
+        </td>
+        <td>
+           <!--  <button (click)="viewMyTeam(team.id)">ver equipo</button> aca agregar link para ver el perfil del jugador-->
+        </td>
+
+    </tr>
+</table>
+
+
+invitar jugador
+
+<input type="text"  [(ngModel)]="search" (ngModelChange)="searchAthlete($event)">
+
+<table g-if="athletesFound.length > 0 ">
+    tabla
+    <tr  *ngFor="let athlete of athletesFound;">
+        <button (click)="inviteMyTeam(team.teamDto.id, athlete.idAthlete)">
+        <td>
+            {{athlete.nick}}
+        </td>
+        <td>
+            {{athlete.name}}
+        </td>
+    </button>
+    </tr>
+</table>

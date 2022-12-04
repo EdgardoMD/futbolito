@@ -29,6 +29,9 @@ export class NewTeamComponent implements OnInit {
     console.log("creando nuevo equipo");
     this.team = new Team(this.name, this.idCity)
     this.teamService.newTeam(this.team).subscribe(
+      team =>{
+        this.router.navigate(['my-teams']);
+      }
       
     )
   }

@@ -1,8 +1,8 @@
 import { Athlete } from "src/app/perfil/model/athlete.model";
 import { Team } from "./team";
 
-export class TeamWithAthletes {
+export interface  TeamWithAthletes {
 
-    team? :Team;
-	athletes? : Athlete[];
+    teamDto :Team ;
+	athletesDto : Athlete[] ;
 }

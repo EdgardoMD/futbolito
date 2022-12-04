@@ -1,11 +1,13 @@
 package com.futbolito.services.implement;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.futbolito.models.DTOs.AthleteDto;
 import com.futbolito.models.entities.Athlete;
 import com.futbolito.models.entities.User;
 import com.futbolito.repository.IAthleteRepository;
@@ -72,5 +74,25 @@ public class AthleteServiceImpl implements IAthleteService {
 		}
 		return athlete;
 	}
+	
+	@Override
+	public List<AthleteDto> findAthletesByNickStartswith(String startNick) {
+		List<Athlete> athletes = this.athleteRepository.findAthletesByNickStartswith(startNick);
+		List<AthleteDto> athleteDtos = null;
+		if(athletes != null && !athletes.isEmpty()) {
+			athleteDtos = listAthetesEntitiesToListAthletesDto(athletes);
+		}
+		return athleteDtos;
+	}
+	
+	private List<AthleteDto> listAthetesEntitiesToListAthletesDto(List<Athlete> athletes){
+		List<AthleteDto> athleteDtos = new ArrayList<AthleteDto>(athletes.size());;
+		for(Athlete athlete: athletes) {
+			athleteDtos.add(new AthleteDto(athlete));
+		}
+		return athleteDtos;
+	}
+	
+	
 
 }

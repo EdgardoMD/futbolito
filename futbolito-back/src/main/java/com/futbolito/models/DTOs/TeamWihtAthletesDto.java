@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class TeamWihtAthletesDto {
 	
 	private TeamDto teamDto;
-	private List<AthleteDto> athleteDto ;
+	private List<AthleteDto> athletesDto ;
 	
 	public TeamWihtAthletesDto(TeamDto teamDto){
 		this.teamDto = teamDto;
