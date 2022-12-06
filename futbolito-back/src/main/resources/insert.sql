@@ -28,6 +28,39 @@ VALUES(3, 'SENT');
 
 
 
+INSERT INTO public.notification_types
+(id_notification_types, type_notification)
+VALUES(1, 'TEAM_INVITATION');
+
+
+INSERT INTO public.status_notification
+(id_status_notification, status_notification)
+VALUES(1, 'REVISED');
+INSERT INTO public.status_notification
+(id_status_notification, status_notification)
+VALUES(2, 'SENT');
+INSERT INTO public.status_notification
+(id_status_notification, status_notification)
+VALUES(3, 'CREATED');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -131,7 +164,9 @@ VALUES(62, 'zzzz@q.cl', 'cew', '$2a$10$Le0z5fKlQbm7eI5pp8HIkemxL.2UmzR9rF.KKaG7R
 
 
 
-
+INSERT INTO athletes
+(id_athletes, birth_date, height,  "position", profile_photo, skillful_foot, weight, athlete_level, city, id_user)
+VALUES(1, 'cumplea�os', 1.7,  'pos', 'foto', 'skillfut', 3, NULL, NULL, 1);
 INSERT INTO athletes
 (id_athletes, birth_date, height,  "position", profile_photo, skillful_foot, weight, athlete_level, city, id_user)
 VALUES(3, 'cumplea�os', 1.7,  'pos', 'foto', 'skillfut', 3, NULL, NULL, 2);
