@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { interceptorProvider } from './interceptors/token-intepcetor.service';
 import { TeamsModule } from './modules/teams/teams.module';
 import { HeaderModule } from './modules/header/header.module';
+import { NotificationsModule } from './modules/notifications/notifications.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HeaderModule } from './modules/header/header.module';
     AutenticacionModule,
     FormsModule,
     TeamsModule,
-    HeaderModule
+    HeaderModule,
+    NotificationsModule
   ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent]

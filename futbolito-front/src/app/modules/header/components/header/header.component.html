@@ -1,25 +1,14 @@
-<div class="toolbar" role="banner">
-    <a routerLink="" routerLinkActive="router-link-active">home</a>
+<nav>
+    <div class="nav-wrapper">
+      <ul class="">
+        <li> <a routerLink="" routerLinkActive="active"><i class="fa-solid fa-house"></i></a></li>
+       <li>  <a routerLink="/perfil" routerLinkActive="active"><i class="fa-solid fa-user"></i></a> </li>
+       <li><a routerLink='/login'> <i class="fa-solid fa-right-to-bracket"></i></a></li>
+       <li> <button  (click)="logOut()"><i class="fa-solid fa-right-to-bracket"></i></button></li>
+       <li> <a routerLink='notifications'> <i class="fa-solid fa-bell"></i></a> </li>
+       <li> <a routerLink='/registro'> <i class="fa-solid fa-user-plus"></i></a> </li>
 
-    <div class="spacer"></div>
+      </ul>
+    </div>
+  </nav>
 
-    <a routerLink="/perfil" routerLinkActive="router-link-active">perfil</a>
-
-    <div class="spacer"></div>
-
-
-    <!-- <li *ngIf="!isLogged"> -->
-        <a routerLink='/login'> iniciar sesion</a>
-    <!-- </li> -->
-
-    <!-- <li *ngIf="isLogged"> -->
-        <button  (click)="logOut()"> cerrar sesion</button>
-    <!-- </li> -->
-    <!-- <li> -->
-        <div class="spacer"></div>
-    <!-- </li> -->
-    <!-- <li *ngIf="!isLogged"> -->
-        <a routerLink='/registro'>crear cuenta</a>
-    <!-- </li> -->
-
-</div>

@@ -6,6 +6,7 @@ import { LoginComponent } from './autenticacion/components/login/login.component
 import { ListMyTeamsComponent } from './modules/teams/components/list-my-teams/list-my-teams.component';
 import { NewTeamComponent } from './modules/teams/components/new-team/new-team.component';
 import { MyTeamComponent } from './modules/teams/components/my-team/my-team.component';
+import { NotificationsComponent } from './modules/notifications/components/notifications/notifications.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,10 @@ const routes: Routes = [
   {
     path: 'my-team',
     component: MyTeamComponent
+  },
+  {
+    path: 'notifications',
+    component: NotificationsComponent
   }
 
 
