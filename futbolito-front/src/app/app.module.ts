@@ -4,7 +4,7 @@ import { HttpClientModule} from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PerfilModule } from './perfil/perfil.module';
+import { PerfilModule } from './modules/perfil/perfil.module';
 import { HomeComponent } from './home/home.component';
 import { AutenticacionModule } from './autenticacion/autenticacion.module';
 import { FormsModule } from '@angular/forms';

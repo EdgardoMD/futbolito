@@ -1,1 +1,58 @@
-/* You can add global styles to this file, and also import other style files */
+
+:root {
+    --silver1: #e3e4e5;
+    --silver2: #EFF5F9;
+    --silver3: #C1D4D9;
+    --silver4: #c6c6c6;
+    --silver5: #949398;
+    --silver6: #979DA6;
+    --silver7: #687688;
+  
+    --turquoise1 : #00ffff;
+    --turquoise2 : #03fff1;
+    --turquoise3 : #04BFAD;
+    --turquoise4 : #03bfb5;
+    --turquoise5 : #018076;
+    --turquoise6 : #00A19C;
+    --turquoise7 : #027373;
+    --turquoise8 : #004146;
+  
+    --black1 : #000000
+  
+  }
+  
+  
+  /* backgrounds */
+  .bg-t1 {
+    background-color: var(--turquoise1);
+  }
+  .bg-s1 {
+    background-color: var(--silver1);
+  }
+  .bg-s7{
+    background-color: var(--silver7);
+  }
+
+  .bg-b1{
+    background-color: var(--black1);
+  }
+  
+  
+  /* colors text  */
+  .t-s1 {
+    color: var(--silver1);
+  }
+  .t-s7 {
+    color: var(--silver7);
+  }
+  .t-b1 {
+    color: var( --black1);
+  }
+  .t-t1b {
+    color: var(  --turquoise1);
+    font-weight: bolder;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  }
+  .t-t1 {
+    color: var(  --turquoise1);
+  }

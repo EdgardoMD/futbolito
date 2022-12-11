@@ -7,6 +7,7 @@ import { ListMyTeamsComponent } from './modules/teams/components/list-my-teams/l
 import { NewTeamComponent } from './modules/teams/components/new-team/new-team.component';
 import { MyTeamComponent } from './modules/teams/components/my-team/my-team.component';
 import { NotificationsComponent } from './modules/notifications/components/notifications/notifications.component';
+import { GuardGuard } from './guards/guard.guard';
 
 const routes: Routes = [
   {
@@ -32,18 +33,22 @@ const routes: Routes = [
   },
   {
     path: 'my-teams',
+    canActivate: [ GuardGuard],
     component: ListMyTeamsComponent
   },
   {
     path: 'new-team',
+    canActivate: [ GuardGuard],
     component: NewTeamComponent
   },
   {
     path: 'my-team',
+    canActivate: [ GuardGuard],
     component: MyTeamComponent
   },
   {
     path: 'notifications',
+    canActivate: [ GuardGuard],
     component: NotificationsComponent
   }
 

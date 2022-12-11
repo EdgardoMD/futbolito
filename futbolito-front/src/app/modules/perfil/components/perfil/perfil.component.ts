@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Athlete } from '../../model/athlete.model';
 
 import {PerfilService} from './../../services/perfil.service'
@@ -13,7 +14,8 @@ export class PerfilComponent implements OnInit {
   perfil: Athlete = {};
 
   constructor(
-    private perfilService : PerfilService
+    private perfilService : PerfilService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -33,6 +35,11 @@ export class PerfilComponent implements OnInit {
   mostrarPerfil(){
     console.log('mostramos en nuevo metodo')
     console.log(this.perfil)
+  }
+
+  logOut(): void {
+    window.sessionStorage.clear();
+    this.router.navigate(['']);
   }
 
 }

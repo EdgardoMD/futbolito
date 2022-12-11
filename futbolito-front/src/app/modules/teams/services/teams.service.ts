@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Athlete } from 'src/app/perfil/model/athlete.model';
 import { environment } from 'src/environments/environment';
 import { Team } from '../models/team';
 import { TeamWithAthletes } from '../models/team-with-athletes';

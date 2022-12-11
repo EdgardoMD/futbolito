@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ]
 })
 export class AutenticacionModule { }

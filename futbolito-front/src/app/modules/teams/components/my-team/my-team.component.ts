@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Athlete } from 'src/app/perfil/model/athlete.model';
+import { Athlete } from 'src/app/modules/perfil/model/athlete.model';
 import { Team } from '../../models/team';
 import { TeamWithAthletes } from '../../models/team-with-athletes';
 import { AthleteService } from '../../services/athlete.service';
