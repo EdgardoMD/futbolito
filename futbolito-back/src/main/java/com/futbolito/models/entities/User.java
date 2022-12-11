@@ -34,15 +34,19 @@ public class User {
 	@GenericGenerator(name = "native", strategy = "native")
 	private Long idUser;
 
+	@JsonIgnore
 	@Column(name = "PASSWORD")
 	private String password;
 
+	@JsonIgnore
 	@Column(name = "phone")
 	private String phone;
 
+	@JsonIgnore
 	@Column(name = "name")
 	private String name;
 
+	@JsonIgnore
 	@Column(name = "MAIL")
 	private String mail;
 	

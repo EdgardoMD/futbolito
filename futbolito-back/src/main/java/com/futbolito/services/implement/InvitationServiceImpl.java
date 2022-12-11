@@ -10,11 +10,13 @@ import com.futbolito.models.entities.Invitation;
 import com.futbolito.models.entities.StatusInvitation;
 import com.futbolito.models.entities.Team;
 import com.futbolito.models.enums.StatusInvitationEnum;
+import com.futbolito.models.enums.TypeNotificationEnum;
 import com.futbolito.repository.IAthleteRepository;
 import com.futbolito.repository.IInvitationRepository;
 import com.futbolito.repository.IStatusInvitationRepository;
 import com.futbolito.repository.ITeamRepository;
 import com.futbolito.services.interfaces.IInvitationService;
+import com.futbolito.services.interfaces.INotificationService;
 
 @Service
 public class InvitationServiceImpl implements IInvitationService {
@@ -31,33 +33,31 @@ public class InvitationServiceImpl implements IInvitationService {
 	@Autowired
 	private IInvitationRepository invitationRepository;
 	
+	@Autowired
+	private INotificationService notificationService;
+	
 	@Override
 	public Invitation save(Invitation obj) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Invitation update(Invitation obj) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<Invitation> toList() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Invitation getById(Long id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean delete(Long id) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -71,6 +71,7 @@ public class InvitationServiceImpl implements IInvitationService {
 			StatusInvitation initialInvitation = statusInvitationRepository.findByStatusInvitation(StatusInvitationEnum.SENT.name()).orElseThrow();
 			Invitation invitation = new Invitation(team, athleteGuest, athleteInvites, initialInvitation);
 			Invitation invitationSave = invitationRepository.save(invitation);
+			notificationService.createNotification(athleteGuest.getUser(), invitationSave.getIdInvitation(), TypeNotificationEnum.TEAM_INVITATION);
 			if(invitationSave != null && invitationSave.getIdInvitation() != 0) {
 				return true;
 			}

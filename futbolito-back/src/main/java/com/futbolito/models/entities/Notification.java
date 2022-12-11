@@ -42,6 +42,16 @@ public class Notification {
 	
 	@Column(name="id_reference")
 	private Long idReference;
+
+	public Notification(User user, StatusNotification statusNotification, TypeNotification typeNotification,
+			Long idReference) {
+		this.user = user;
+		this.statusNotification = statusNotification;
+		this.typeNotification = typeNotification;
+		this.idReference = idReference;
+	}
+	
+	
 	
 	
 	

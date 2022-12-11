@@ -42,6 +42,11 @@ VALUES(2, 'SENT');
 INSERT INTO public.status_notification
 (id_status_notification, status_notification)
 VALUES(3, 'CREATED');
+INSERT INTO public.status_notification
+(id_status_notification, status_notification)
+VALUES(4, 'VIEW');
+
+
 
 
 

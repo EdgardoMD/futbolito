@@ -4,6 +4,7 @@ public enum StatusNotificationEnum {
 	
 	CREATED,
 	SENT,
-	REVISED
+	REVISED,
+	VIEW
 
 }
