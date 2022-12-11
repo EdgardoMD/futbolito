@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Team } from 'src/app/models/team';
 import { TeamsService } from '../../services/teams.service';
-import { Team } from '../../models/team';
-import { FormsModule } from '@angular/forms'
 
 @Component({
   selector: 'app-new-team',
