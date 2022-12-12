@@ -5,7 +5,7 @@ import { HttpClientModule} from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PerfilModule } from './modules/perfil/perfil.module';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './modules/home/componets/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { interceptorProvider } from './interceptors/token-intepcetor.service';
 import { TeamsModule } from './modules/teams/teams.module';

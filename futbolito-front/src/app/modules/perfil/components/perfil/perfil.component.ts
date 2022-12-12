@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Athlete } from '../../../../models/athlete.model';
 
-import {PerfilService} from './../../services/perfil.service'
+import {PerfilService} from '../../../../services/perfil.service'
 
 @Component({
   selector: 'app-perfil',

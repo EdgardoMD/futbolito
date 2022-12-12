@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './modules/home/componets/home/home.component';
 import { ListMyTeamsComponent } from './modules/teams/components/list-my-teams/list-my-teams.component';
 import { NewTeamComponent } from './modules/teams/components/new-team/new-team.component';
 import { MyTeamComponent } from './modules/teams/components/my-team/my-team.component';

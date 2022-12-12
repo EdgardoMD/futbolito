@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Athlete } from 'src/app/models/athlete.model';
+import { TeamsService } from 'src/app/services/teams.service';
 import { TeamWithAthletes } from '../../../../models/team-with-athletes';
-import { AthleteService } from '../../services/athlete.service';
-import { TeamsService } from '../../services/teams.service';
+import { AthleteService } from '../../../../services/athlete.service';
 
 @Component({
   selector: 'app-my-team',

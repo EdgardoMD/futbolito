@@ -3,7 +3,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Team } from 'src/app/models/team';
 import { environment } from 'src/environments/environment';
-import { TeamWithAthletes } from '../../../models/team-with-athletes';
+import { TeamWithAthletes } from '../models/team-with-athletes';
 
 @Injectable({
   providedIn: 'root'

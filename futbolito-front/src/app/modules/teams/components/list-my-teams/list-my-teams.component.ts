@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Team } from 'src/app/models/team';
-import { TeamsService } from '../../services/teams.service';
+import { TeamsService } from 'src/app/services/teams.service';
 
 @Component({
   selector: 'app-list-my-teams',
