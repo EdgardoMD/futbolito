@@ -21,6 +21,7 @@ import com.futbolito.repository.IAthleteRepository;
 import com.futbolito.repository.ICityRepository;
 import com.futbolito.repository.ILevelTeamRepository;
 import com.futbolito.repository.ITeamRepository;
+import com.futbolito.services.interfaces.IInvitationService;
 import com.futbolito.services.interfaces.ITeamService;
 
 import javassist.NotFoundException;
@@ -42,6 +43,9 @@ public class TeamServiceImpl implements ITeamService {
 	
 	@Autowired
 	private IAthleteRepository athleteRepository;
+	
+	@Autowired
+	private IInvitationService invitationService;
 
 	@Override
 	public Team save(Team obj) {
@@ -105,7 +109,7 @@ public class TeamServiceImpl implements ITeamService {
 	}
 
 	@Override
-	public TeamWihtAthletesDto getMyTeamById(Long idTeam) {
+	public TeamWihtAthletesDto getMyTeamById(Long idTeam, Long idUser) {
 		Team team = this.getById(idTeam);
 		List<Athlete> athletes = athleteRepository.getAthletesByIdTeams(idTeam);
 		TeamDto teamDto = new TeamDto(team);
@@ -120,6 +124,11 @@ public class TeamServiceImpl implements ITeamService {
 		} else {
 			teamWhitAthletesDto = new TeamWihtAthletesDto(teamDto);
 		}
+		
+		teamWhitAthletesDto.getTeamDto().setIsMyTeam(belongsToTheTeam(idUser, teamWhitAthletesDto));
+		teamWhitAthletesDto.getTeamDto().setIsGuest(invitationService.thisAthleteIsAGuest(idUser, idTeam));
+		
+		
 		return teamWhitAthletesDto;
 	}
 	
@@ -133,6 +142,10 @@ public class TeamServiceImpl implements ITeamService {
 		}
 		return false;
 	}
+	
+	
+	
+
 	
 
 

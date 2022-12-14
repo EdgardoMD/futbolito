@@ -14,4 +14,12 @@ public interface IInvitationService extends ICRUD<Invitation>{
 	 */
 	Boolean createInvitationToTeam(Long idTeam, Long idguest, Long idInvites) throws Exception;
 
+	/**
+	 * pregunta si el atleta esta invitado al equipo
+	 * @param idAthlete
+	 * @param idTeam
+	 * @return
+	 */
+	Boolean thisAthleteIsAGuest(Long idAthlete, Long idTeam);
+
 }

@@ -21,6 +21,8 @@ public class TeamDto {
 	private String city;
 	private Long idCity;
 	private List<Long> idsAtletes;
+	private Boolean isMyTeam;
+	private Boolean isGuest;
 	
 	public TeamDto(Team team) {
 		this.id = team.getId()  ;

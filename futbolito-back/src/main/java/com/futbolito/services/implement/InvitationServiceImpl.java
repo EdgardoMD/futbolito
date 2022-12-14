@@ -68,7 +68,7 @@ public class InvitationServiceImpl implements IInvitationService {
 		Team team = this.teamRepository.findById(idTeam).orElseThrow();
 		List<Athlete> athletesBelongingToTeam = athleteRepository.getAthletesByIdTeams(idTeam);
 		if(belongsToTheTeam(athletesBelongingToTeam, athleteInvites)) {
-			StatusInvitation initialInvitation = statusInvitationRepository.findByStatusInvitation(StatusInvitationEnum.SENT.name()).orElseThrow();
+			StatusInvitation initialInvitation = statusInvitationRepository.findByStatusInvitation(StatusInvitationEnum.CREATED.name()).orElseThrow();
 			Invitation invitation = new Invitation(team, athleteGuest, athleteInvites, initialInvitation);
 			Invitation invitationSave = invitationRepository.save(invitation);
 			notificationService.createNotification(athleteGuest.getUser(), invitationSave.getIdInvitation(), TypeNotificationEnum.TEAM_INVITATION);
@@ -91,6 +91,11 @@ public class InvitationServiceImpl implements IInvitationService {
 		}
 		return false;
 
+	}
+	
+	@Override
+	public Boolean thisAthleteIsAGuest(Long idAthlete, Long idTeam) {
+		return invitationRepository.thisAthleteIsAGuest(idAthlete, idTeam);
 	}
 
 }

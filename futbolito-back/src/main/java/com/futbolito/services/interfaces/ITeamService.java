@@ -24,13 +24,6 @@ public interface ITeamService extends ICRUD<Team> {
 	 * @throws NotFoundException 
 	 */
 	public List<TeamDto> getTeamsByIdUser(Long idUser) throws NotFoundException;
-	
-	/**
-	 * obtiene un equupo por id con sus jugadores asociados
-	 * @param idTeam
-	 * @return
-	 */
-	public TeamWihtAthletesDto getMyTeamById(Long idTeam);
 
 	
 	/**
@@ -40,5 +33,13 @@ public interface ITeamService extends ICRUD<Team> {
 	 * @return
 	 */
 	Boolean belongsToTheTeam(Long idUser, TeamWihtAthletesDto athletesDtos);
+
+	/**
+	 * obtiene un equupo por id con sus jugadores asociados
+	 * @param idTeam
+	 * @param idUser
+	 * @return
+	 */
+	TeamWihtAthletesDto getMyTeamById(Long idTeam, Long idUser);
 
 }

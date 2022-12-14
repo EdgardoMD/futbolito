@@ -63,12 +63,23 @@ public class teamController {
 	public ResponseEntity<TeamWihtAthletesDto> getMyTeam(@RequestParam Long idTeam,  Authentication authentication){
 		Long idUser = ((MainUser) authentication.getPrincipal()).getId();
 		try {
-			TeamWihtAthletesDto athletesDtos = teamService.getMyTeamById(idTeam);
+			TeamWihtAthletesDto athletesDtos = teamService.getMyTeamById(idTeam, idUser);
 			if(teamService.belongsToTheTeam(idUser, athletesDtos)) {
 				return new ResponseEntity<TeamWihtAthletesDto>(athletesDtos, HttpStatus.OK);
 			} else {
 				throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+		}
+	}
+	
+	@GetMapping("/team")
+	public ResponseEntity<TeamWihtAthletesDto> getTeam(@RequestParam Long idTeam,  Authentication authentication){
+		Long idUser = ((MainUser) authentication.getPrincipal()).getId();
+		try {
+			TeamWihtAthletesDto athletesDtos = teamService.getMyTeamById(idTeam, idUser);
+			return new ResponseEntity<TeamWihtAthletesDto>(athletesDtos, HttpStatus.OK);
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
 		}
