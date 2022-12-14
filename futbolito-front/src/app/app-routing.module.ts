@@ -8,6 +8,7 @@ import { NotificationsComponent } from './modules/notifications/components/notif
 import { GuardGuard } from './guards/guard.guard';
 import { RegistroComponent } from './modules/autenticacion/components/registro/registro.component';
 import { LoginComponent } from './modules/autenticacion/components/login/login.component';
+import { TeamComponent } from './modules/teams/components/team/team.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,11 @@ const routes: Routes = [
     path: 'notifications',
     canActivate: [ GuardGuard],
     component: NotificationsComponent
+  },
+  {
+    path: 'team/:param',
+    canActivate: [ GuardGuard],
+    component: TeamComponent
   }
 
 

@@ -1,0 +1,4 @@
+export enum NotificationType {
+    TEAM_INVITATION = 'TEAM_INVITATION',
+	NEW_CHALLENGE_TEAM = 'NEW_CHALLENGE_TEAM'
+}

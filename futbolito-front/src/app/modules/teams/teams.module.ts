@@ -7,6 +7,8 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { NewTeamComponent } from './components/new-team/new-team.component';
 import { ListMyTeamsComponent } from './components/list-my-teams/list-my-teams.component';
 import { MyTeamComponent } from './components/my-team/my-team.component';
+import { TeamComponent } from './components/team/team.component';
+import { TeamInvitationsComponent } from './components/team-invitations/team-invitations.component';
 
 
 
@@ -15,7 +17,9 @@ import { MyTeamComponent } from './components/my-team/my-team.component';
   declarations: [
     ListMyTeamsComponent,
     NewTeamComponent,
-    MyTeamComponent
+    MyTeamComponent,
+    TeamComponent,
+    TeamInvitationsComponent
   ],
   imports: [
     BrowserModule,

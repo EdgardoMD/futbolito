@@ -1,1 +1,32 @@
-<p>notifications works!</p>
+
+<div *ngFor="let notification of notifications;" >
+    <a [routerLink]="['/team/', notification.data.team.id]">
+            <div class="card " *ngIf="notification.typeNotification == TEAM_INVITATION">
+                <div class="card-content">
+                  <p> {{notification.data.athleteInvites.user.nickName}} te ha invitado a ser parte del equipo  {{notification.data.team.name}}</p>
+                </div>
+            </div>
+
+
+           
+
+
+
+
+       
+       
+           
+      
+        </a>
+</div>
+
+
+
+
+
+
+
+
+
+
+

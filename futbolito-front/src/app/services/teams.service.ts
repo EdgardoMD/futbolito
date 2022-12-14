@@ -38,6 +38,11 @@ export class TeamsService {
     return this.httpClient.post<boolean>(environment.apiUrl + '/invitation/created-invitation', body);
   }
 
+  public getTeam(idTeam: number) :  Observable<TeamWithAthletes>{
+    let param: any = {'idTeam': idTeam};
+    return this.httpClient.get<TeamWithAthletes>(this.teamsURL + '/team/', {params: param});
+  }
+
 
 
 

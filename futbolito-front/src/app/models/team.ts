@@ -8,6 +8,8 @@ export class Team {
     idTeamLevel?: number;
     idCity?: number;
     idsAthletes?: number[];
+    isMyTeam?: boolean;
+	isGuest?: boolean;
 
 
     constructor(name?: string, idCity?: number) {

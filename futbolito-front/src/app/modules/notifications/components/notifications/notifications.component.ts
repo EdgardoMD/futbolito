@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NotificationsService } from 'src/app/services/notifications.service';
+import { Notification } from 'src/app/models/notification.model';
+import { NotificationType } from 'src/app/models/enums/notification-type.enum';
 
 @Component({
   selector: 'app-notifications',
@@ -9,7 +11,8 @@ import { NotificationsService } from 'src/app/services/notifications.service';
 })
 export class NotificationsComponent implements OnInit {
 
-  objectos: any[] = [];
+  notifications: Notification[] = [];
+  TEAM_INVITATION : NotificationType = NotificationType.TEAM_INVITATION;
 
   constructor(
     private router : Router,
@@ -18,12 +21,17 @@ export class NotificationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getnotifications();
+    
+   
+    
   }
 
   getnotifications(){
     this.notificationsService.getNotifications().subscribe(
             notifications => {
-              console.log(notifications);
+              this.notifications = notifications;
+              console.log(this.notifications)
+
       }
     )
   }

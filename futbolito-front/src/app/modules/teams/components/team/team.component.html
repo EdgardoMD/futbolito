@@ -1,0 +1,22 @@
+<div class="card " *ngIf="team.teamDto.isGuest">
+    <div class="card-content">
+        <p> es invitado</p>
+      </div>
+  </div>
+  <div class="card " *ngIf="!team.teamDto.isGuest">
+    <div class="card-content">
+        <p>no es invitado</p>
+      </div>
+  </div>
+  <div class="card " *ngIf="team.teamDto.isMyTeam">
+    <div class="card-content">
+        <p> es mi equipo</p>
+      </div>
+  </div>
+  <div class="card " *ngIf="!team.teamDto.isMyTeam">
+    <div class="card-content">
+        <p>no es mi equipo</p>
+      </div>
+  </div>
+
+<h1>{{team.teamDto.name}}</h1>
