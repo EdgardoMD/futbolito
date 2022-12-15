@@ -25,6 +25,10 @@ VALUES(2, 'REJECTED');
 INSERT INTO public.status_invitation
 (id_status_invitation, status_invitation)
 VALUES(3, 'SENT');
+INSERT INTO public.status_invitation
+(id_status_invitation, status_invitation)
+VALUES(4, 'CREATED');
+
 
 
 

@@ -1,5 +1,6 @@
 package com.futbolito.services.implement;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.futbolito.models.DTOs.NotificationDto;
 import com.futbolito.models.entities.Invitation;
@@ -67,6 +69,7 @@ public class NotificationServiceImplemet implements INotificationService {
 	}
 
 	@Override
+	@Transactional
 	public List<NotificationDto> findNotificationByIdUser(Long idUser) {
 		List<Notification> notifications = notificationRep.findNotificationsbyUserId(idUser);
 		this.changeNotificationStatusToSent(notifications);
@@ -87,9 +90,11 @@ public class NotificationServiceImplemet implements INotificationService {
 		}
 	}
 
+	@Async
+
 	private void ChangeStatusNotification(List<Long> idNotificationCreated,
 			StatusNotificationEnum statusNotificationEnum) {
-		notificationRep.updateStatusNotifictions(statusNotificationEnum.name(), idNotificationCreated);
+			notificationRep.updateStatusNotifictions(statusNotificationEnum.name(), idNotificationCreated);
 	}
 
 	private Map<TypeNotificationEnum, List<Notification>> groupNotifications(List<Notification> notifications) {
@@ -153,7 +158,8 @@ public class NotificationServiceImplemet implements INotificationService {
 		TypeNotification typeNotifi = typeRep.findTypeNotificationbyType(typeNotification.toString()).orElseThrow();
 		StatusNotification statusNotification = statusRep
 				.findStatusNotificationbyStatus(StatusNotificationEnum.CREATED.name()).orElseThrow();
-		Notification notification = new Notification(userToNotify, statusNotification, typeNotifi, idReference);
+		Notification notification = new Notification(userToNotify, statusNotification, typeNotifi, idReference,
+				LocalDateTime.now());
 		this.save(notification);
 	}
 }

@@ -10,12 +10,12 @@ import com.futbolito.models.entities.Invitation;
 public interface IInvitationRepository extends JpaRepository<Invitation, Long> {
 
 	@Query(value = "select CASE WHEN COUNT(1) > 0 THEN true ELSE false END from invitation "
-			+ "where id_status_invitation = (select id_status_invitation  from status_invitation si where status_invitation = 'SENT') "
+			+ "where id_status_invitation = (select id_status_invitation  from status_invitation si where status_invitation = 'CREATED') "
 			+ "and id_athlete_guest = :id_athlete and id_team = :id_team  ", nativeQuery = true)
 	public Boolean thisAthleteIsAGuest(@Param("id_athlete") Long idAthlete, @Param("id_team") Long idTeam);
 	
 	
-	@Query(value = "select * from invitation where id_status_invitation = (select id_status_invitation  from status_invitation si where status_invitation = 'SENT') "
+	@Query(value = "select * from invitation where id_status_invitation = (select id_status_invitation  from status_invitation si where status_invitation = 'CREATED') "
 			+ "and id_athlete_guest = :id_athlete_guest and id_team = :id_team ", nativeQuery = true)
 	public Invitation findInvitationSendByGuestAndTeam(@Param("id_athlete_guest") Long idAthlete, @Param("id_team") Long idTeam);
 	

@@ -1,6 +1,7 @@
 package com.futbolito.services.implement;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -70,23 +71,34 @@ public class InvitationServiceImpl implements IInvitationService {
 
 	@Override
 	public Boolean createInvitationToTeam(Long idTeam, Long idguest, Long idInvites) throws Exception {
-		//falta comprobar si el jugador al que se esta invitando no es ya parte del equipo
-		//tambien comprobar esto en el front
-		//comprobar si el jugador invitado no ha sido Ya invtado a la espera de aprobacion
-		Athlete athleteGuest = athleteRepository.findById(idguest).orElseThrow();
-		Athlete athleteInvites = athleteRepository.findByUserId(idInvites).orElseThrow();
-		Team team = this.teamRepository.findById(idTeam).orElseThrow();
-		List<Athlete> athletesBelongingToTeam = athleteRepository.getAthletesByIdTeams(idTeam);
-		if (!athletesBelongingToTeam.contains(athleteInvites)) {
-			throw new Exception("jugador no es parte del equipo");
+		try {
+			if (invitationRepository.thisAthleteIsAGuest(idguest, idTeam)) {
+				throw new Exception("jugador ya esta invitado a este equipo");
+			}
+			Athlete athleteGuest = athleteRepository.findById(idguest).orElseThrow();
+			Athlete athleteInvites = athleteRepository.findByUserId(idInvites).orElseThrow();
+			Team team = this.teamRepository.findById(idTeam).orElseThrow();
+			List<Athlete> athletesBelongingToTeam = team.getAthletesTeam().stream()
+				    .map(AthleteTeam::getAthlete).collect(Collectors.toList());
+			if (!athletesBelongingToTeam.contains(athleteInvites)) {
+				throw new Exception("jugador que invita no es parte del equipo");
+			}
+			if (athletesBelongingToTeam.contains(athleteGuest)) {
+				throw new Exception("jugador invitado ya es parte del equipo");
+			}
+			
+			StatusInvitation initialInvitation = statusInvitationRepository
+					.findByStatusInvitation(StatusInvitationEnum.CREATED.name()).orElseThrow();
+			Invitation invitation = new Invitation(team, athleteGuest, athleteInvites, initialInvitation);
+			Invitation invitationSave = invitationRepository.save(invitation);
+			notificationService.createNotification(athleteGuest.getUser(), invitationSave.getIdInvitation(),
+					TypeNotificationEnum.TEAM_INVITATION);
+			return invitationSave != null && invitationSave.getIdInvitation() != 0;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
 		}
-		StatusInvitation initialInvitation = statusInvitationRepository
-				.findByStatusInvitation(StatusInvitationEnum.CREATED.name()).orElseThrow();
-		Invitation invitation = new Invitation(team, athleteGuest, athleteInvites, initialInvitation);
-		Invitation invitationSave = invitationRepository.save(invitation);
-		notificationService.createNotification(athleteGuest.getUser(), invitationSave.getIdInvitation(),
-				TypeNotificationEnum.TEAM_INVITATION);
-		return invitationSave != null && invitationSave.getIdInvitation() != 0;
+		
 	}
 
 	@Override
@@ -98,11 +110,17 @@ public class InvitationServiceImpl implements IInvitationService {
 	@Transactional
 	@Override
 	public Boolean acceptInvitationToTeam(Long idTeam, Long Idguest) {
-		Invitation invitation = invitationRepository.findInvitationSendByGuestAndTeam(Idguest, idTeam);
-		AthleteTeam athleteTeam = new AthleteTeam(invitation.getTeam(), invitation.getAthleteGuest());
-		atheteTeamRepository.save(athleteTeam);
-		invitationRepository.updateInvitaionStatus(StatusInvitationEnum.ACCEPTED.name(), invitation.getIdInvitation());
-		return true;
+		try {
+			Invitation invitation = invitationRepository.findInvitationSendByGuestAndTeam(Idguest, idTeam);
+			AthleteTeam athleteTeam = new AthleteTeam(invitation.getTeam(), invitation.getAthleteGuest());
+			atheteTeamRepository.save(athleteTeam);
+			invitationRepository.updateInvitaionStatus(StatusInvitationEnum.ACCEPTED.name(), invitation.getIdInvitation());
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+		
 	}
 
 }

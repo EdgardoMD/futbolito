@@ -23,6 +23,9 @@ export class InvitationService {
     return this.httpClient.post<boolean>(this.invitationURL + '/accept-invitation', null, {params: params});
 }
 
+//xcrear funcionalidad que recargue el componete una vez que acepte la invitacion
+//crear servicio para rechazar la invitacion
+
 
 
 

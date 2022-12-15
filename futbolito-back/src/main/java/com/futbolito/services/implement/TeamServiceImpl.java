@@ -2,6 +2,7 @@ package com.futbolito.services.implement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -17,7 +18,6 @@ import com.futbolito.models.entities.City;
 import com.futbolito.models.entities.LevelTeam;
 import com.futbolito.models.entities.Team;
 import com.futbolito.repository.IAtheteTeamRepository;
-import com.futbolito.repository.IAthleteRepository;
 import com.futbolito.repository.ICityRepository;
 import com.futbolito.repository.ILevelTeamRepository;
 import com.futbolito.repository.ITeamRepository;
@@ -40,9 +40,7 @@ public class TeamServiceImpl implements ITeamService {
 	
 	@Autowired
 	private IAtheteTeamRepository atheteTeamRepository;
-	
-	@Autowired
-	private IAthleteRepository athleteRepository;
+
 	
 	@Autowired
 	private IInvitationService invitationService;
@@ -88,6 +86,7 @@ public class TeamServiceImpl implements ITeamService {
 		AthleteTeam athleteTeam = new AthleteTeam();
 		athleteTeam.setAthlete(athlete);
 		athleteTeam.setTeam(teamSaved);
+		athleteTeam.setIsCaptain(true);
 		atheteTeamRepository.save(athleteTeam);
 		TeamDto teamDtoSaved = new TeamDto(teamSaved);
 		return teamDtoSaved;
@@ -111,24 +110,21 @@ public class TeamServiceImpl implements ITeamService {
 	@Override
 	public TeamWihtAthletesDto getMyTeamById(Long idTeam, Long idUser) {
 		Team team = this.getById(idTeam);
-		List<Athlete> athletes = athleteRepository.getAthletesByIdTeams(idTeam);
+		List<AthleteTeam> athleteTeams = team.getAthletesTeam();
+		List<Athlete> athletes = athleteTeams.stream()
+			    .map(AthleteTeam::getAthlete).collect(Collectors.toList());
 		TeamDto teamDto = new TeamDto(team);
-		List<AthleteDto> athleteDtos;
 		TeamWihtAthletesDto teamWhitAthletesDto;
-		if(athletes!= null && !athletes.isEmpty()) {
-			athleteDtos = new ArrayList<>(athletes.size());
-			for(Athlete athlete :athletes) {
-				athleteDtos.add(new AthleteDto(athlete));
-			}
-			teamWhitAthletesDto = new TeamWihtAthletesDto(teamDto, athleteDtos);
+		if (!athletes.isEmpty()) {
+		    List<AthleteDto> athleteDtos = athletes.stream()
+		        .map(AthleteDto::new)
+		        .collect(Collectors.toList());
+		    teamWhitAthletesDto = new TeamWihtAthletesDto(teamDto, athleteDtos);
 		} else {
-			teamWhitAthletesDto = new TeamWihtAthletesDto(teamDto);
+		    teamWhitAthletesDto = new TeamWihtAthletesDto(teamDto);
 		}
-		
 		teamWhitAthletesDto.getTeamDto().setIsMyTeam(belongsToTheTeam(idUser, teamWhitAthletesDto));
 		teamWhitAthletesDto.getTeamDto().setIsGuest(invitationService.thisAthleteIsAGuest(idUser, idTeam));
-		
-		
 		return teamWhitAthletesDto;
 	}
 	
