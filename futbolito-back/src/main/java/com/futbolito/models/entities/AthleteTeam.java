@@ -36,4 +36,11 @@ public class AthleteTeam {
 	@JoinColumn(name="id_athlete")
 	private Athlete athlete;
 
+	public AthleteTeam(Team team, Athlete athlete) {
+		this.team = team;
+		this.athlete = athlete;
+	}
+	
+
+
 }

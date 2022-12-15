@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { TeamWithAthletes } from 'src/app/models/team-with-athletes';
+import { InvitationService } from 'src/app/services/invitation.service';
 import { TeamsService } from 'src/app/services/teams.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class TeamComponent implements OnInit {
 
   constructor(
     private rutaActiva: ActivatedRoute,
-    private teamService: TeamsService
+    private teamService: TeamsService,
+    private invitationService : InvitationService
   ) { }
 
 
@@ -29,6 +31,14 @@ export class TeamComponent implements OnInit {
     this.teamService.getTeam(this.idTeam).subscribe(
       response => {
         this.team = response;
+      }
+    )
+  }
+
+  acceptInvitationTeam(){
+    this.invitationService.acceptInvitationTeam(this.idTeam).subscribe(
+      response => {
+        console.log(response)
       }
     )
   }

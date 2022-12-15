@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Athlete } from 'src/app/models/athlete.model';
+import { InvitationService } from 'src/app/services/invitation.service';
 import { TeamsService } from 'src/app/services/teams.service';
 import { TeamWithAthletes } from '../../../../models/team-with-athletes';
 import { AthleteService } from '../../../../services/athlete.service';
@@ -20,6 +21,7 @@ export class MyTeamComponent implements OnInit {
   constructor(
     private teamService : TeamsService,
     private athleteService : AthleteService,
+    private invitationService : InvitationService,
     private router : Router
   ) { }
 
@@ -52,8 +54,7 @@ export class MyTeamComponent implements OnInit {
   }
 
   inviteMyTeam(idTeam : any, idAthele: any ){
-    console.log("entro")
-    this.teamService.createdInvitationMyTeam( idTeam , idAthele).subscribe(
+    this.invitationService.createdInvitationMyTeam( idTeam , idAthele).subscribe(
       response => {
         console.log("responde = "  + response)
       }

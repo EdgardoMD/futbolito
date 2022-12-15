@@ -22,4 +22,12 @@ public interface IInvitationService extends ICRUD<Invitation>{
 	 */
 	Boolean thisAthleteIsAGuest(Long idAthlete, Long idTeam);
 
+	/**
+	 * acepta la invitacion enviada para ser parte de un equipo
+	 * @param idTeam
+	 * @param Idguest
+	 * @return
+	 */
+	Boolean acceptInvitationToTeam(Long idTeam, Long Idguest);
+
 }

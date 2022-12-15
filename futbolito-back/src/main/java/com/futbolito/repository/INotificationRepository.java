@@ -16,8 +16,8 @@ public interface INotificationRepository extends JpaRepository<Notification, Lon
 	
 	
 	
-	@Query(value = "update notifications\r\n"
-					+ "	set id_status_notification = (select id_status_notification from status_notification where status_notification = :status)\r\n"
+	@Query(value = "update notifications "
+					+ "	set id_status_notification = (select id_status_notification from status_notification where status_notification = :status) "
 					+ "	where id_notification in (:ids_notifications)", nativeQuery = true)
 	public void updateStatusNotifictions(String status , @Param("ids_notifications") List<Long> UserId);
 	
