@@ -1,5 +1,7 @@
 package com.futbolito.models.entities;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -59,6 +61,12 @@ public class Athlete {
 	
 	@Column(name="profile_photo")
 	private String profilePhoto;
+	
+	@Column(name="creation_date", updatable = false, nullable = false)
+	private LocalDateTime creationDate;
+	
+	@Column(name="update_date")
+	private LocalDateTime updateDate;
 
 	public Athlete(User user) {
 		this.user = user;

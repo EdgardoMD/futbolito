@@ -1,5 +1,7 @@
 package com.futbolito.models.entities;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,13 +44,20 @@ public class Notification {
 	
 	@Column(name="id_reference")
 	private Long idReference;
+	
+	@Column(name="creation_date", updatable = false, nullable = false)
+	private LocalDateTime creationDate;
+	
+	@Column(name="update_date")
+	private LocalDateTime updateDate;
 
 	public Notification(User user, StatusNotification statusNotification, TypeNotification typeNotification,
-			Long idReference) {
+			Long idReference, LocalDateTime creationDate ) {
 		this.user = user;
 		this.statusNotification = statusNotification;
 		this.typeNotification = typeNotification;
 		this.idReference = idReference;
+		this.creationDate = creationDate;
 	}
 	
 	

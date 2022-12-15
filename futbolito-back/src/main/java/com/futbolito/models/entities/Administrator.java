@@ -1,5 +1,7 @@
 package com.futbolito.models.entities;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,6 +38,12 @@ public class Administrator {
 	@ManyToOne
 	@JoinColumn(name="ID_facility")
 	private Facility facility;
+	
+	@Column(name="creation_date", updatable = false, nullable = false)
+	private LocalDateTime creationDate;
+	
+	@Column(name="update_date")
+	private LocalDateTime updateDate;
 
 
 }

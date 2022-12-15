@@ -1,5 +1,7 @@
 package com.futbolito.models.entities;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,5 +33,8 @@ public class Score {
 	
 	@Column(name="score")
 	private int score;
+	
+	@Column(name="update_date")
+	private LocalDateTime updateDate;
 
 }

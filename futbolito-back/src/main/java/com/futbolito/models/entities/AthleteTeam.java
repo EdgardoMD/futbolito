@@ -1,5 +1,7 @@
 package com.futbolito.models.entities;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,6 +37,16 @@ public class AthleteTeam {
 	@ManyToOne
 	@JoinColumn(name="id_athlete")
 	private Athlete athlete;
+	
+	@Column(name="is_captain")
+	private Boolean isCaptain;
+	
+	@Column(name="creation_date", updatable = false, nullable = false)
+	private LocalDateTime creationDate;
+	
+	@Column(name="update_date")
+	private LocalDateTime updateDate;
+	
 
 	public AthleteTeam(Team team, Athlete athlete) {
 		this.team = team;

@@ -1,5 +1,6 @@
 package com.futbolito.models.entities;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -52,6 +53,12 @@ public class User {
 	
 	@Column(name = "nick_name")
 	private String nickName;
+	
+	@Column(name="creation_date", updatable = false, nullable = false)
+	private LocalDateTime creationDate;
+	
+	@Column(name="update_date")
+	private LocalDateTime updateDate;
 
 	@JsonIgnore
 	@Transient
