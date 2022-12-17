@@ -1,5 +1,6 @@
 package com.futbolito.services.implement;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -84,6 +85,7 @@ public class UserServiceImpl implements IUserService {
 		user.setPassword( passwordEncoder.encode(newUser.getPassword()));
 		user.setPhone(newUser.getPhone());
 		user.setNickName(newUser.getNickname());
+		user.setCreationDate(LocalDateTime.now());
 		User registeredUser = save(user);
 		UserRole rolUsuario = new UserRole();
 		rolUsuario.setUser(registeredUser);

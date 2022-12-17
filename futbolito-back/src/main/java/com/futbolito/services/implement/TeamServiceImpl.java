@@ -1,5 +1,6 @@
 package com.futbolito.services.implement;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -82,11 +83,13 @@ public class TeamServiceImpl implements ITeamService {
 		team.setTeamLevel(levelTeam);
 		team.setCity(city);
 		team.setScore(0);
+		team.setCreationDate(LocalDateTime.now());
 		Team teamSaved = teamRepository.save(team);
 		AthleteTeam athleteTeam = new AthleteTeam();
 		athleteTeam.setAthlete(athlete);
 		athleteTeam.setTeam(teamSaved);
 		athleteTeam.setIsCaptain(true);
+		athleteTeam.setCreationDate(LocalDateTime.now());
 		atheteTeamRepository.save(athleteTeam);
 		TeamDto teamDtoSaved = new TeamDto(teamSaved);
 		return teamDtoSaved;

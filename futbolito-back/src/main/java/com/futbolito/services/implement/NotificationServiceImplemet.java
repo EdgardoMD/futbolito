@@ -71,11 +71,17 @@ public class NotificationServiceImplemet implements INotificationService {
 	@Override
 	@Transactional
 	public List<NotificationDto> findNotificationByIdUser(Long idUser) {
-		List<Notification> notifications = notificationRep.findNotificationsbyUserId(idUser);
-		this.changeNotificationStatusToSent(notifications);
-		Map<TypeNotificationEnum, List<Notification>> map = groupNotifications(notifications);
-		List<NotificationDto> notificationDtos = findEntitiesRelatedToNotification(map);
-		return notificationDtos;
+		try {
+			List<Notification> notifications = notificationRep.findNotificationsbyUserId(idUser);
+			this.changeNotificationStatusToSent(notifications);
+			Map<TypeNotificationEnum, List<Notification>> map = groupNotifications(notifications);
+			List<NotificationDto> notificationDtos = findEntitiesRelatedToNotification(map);
+			return notificationDtos;
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
+		
 	}
 
 	

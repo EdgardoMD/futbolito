@@ -1,5 +1,6 @@
 package com.futbolito.services.implement;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -77,6 +78,7 @@ public class InvitationServiceImpl implements IInvitationService {
 			}
 			Athlete athleteGuest = athleteRepository.findById(idguest).orElseThrow();
 			Athlete athleteInvites = athleteRepository.findByUserId(idInvites).orElseThrow();
+			
 			Team team = this.teamRepository.findById(idTeam).orElseThrow();
 			List<Athlete> athletesBelongingToTeam = team.getAthletesTeam().stream()
 				    .map(AthleteTeam::getAthlete).collect(Collectors.toList());
@@ -86,10 +88,14 @@ public class InvitationServiceImpl implements IInvitationService {
 			if (athletesBelongingToTeam.contains(athleteGuest)) {
 				throw new Exception("jugador invitado ya es parte del equipo");
 			}
-			
+			AthleteTeam athleteTeam = team.getAthletesTeam().stream().filter(
+					at -> at.getAthlete().equals(athleteInvites)).findFirst().orElse(null);
+			if(athleteTeam.getIsCaptain() == null || !athleteTeam.getIsCaptain()) {
+				throw new Exception("un jugador no capitan no puede invitar a un equipo");
+			}
 			StatusInvitation initialInvitation = statusInvitationRepository
 					.findByStatusInvitation(StatusInvitationEnum.CREATED.name()).orElseThrow();
-			Invitation invitation = new Invitation(team, athleteGuest, athleteInvites, initialInvitation);
+			Invitation invitation = new Invitation(team, athleteGuest, athleteInvites, initialInvitation, LocalDateTime.now());
 			Invitation invitationSave = invitationRepository.save(invitation);
 			notificationService.createNotification(athleteGuest.getUser(), invitationSave.getIdInvitation(),
 					TypeNotificationEnum.TEAM_INVITATION);
@@ -112,7 +118,7 @@ public class InvitationServiceImpl implements IInvitationService {
 	public Boolean acceptInvitationToTeam(Long idTeam, Long Idguest) {
 		try {
 			Invitation invitation = invitationRepository.findInvitationSendByGuestAndTeam(Idguest, idTeam);
-			AthleteTeam athleteTeam = new AthleteTeam(invitation.getTeam(), invitation.getAthleteGuest());
+			AthleteTeam athleteTeam = new AthleteTeam(invitation.getTeam(), invitation.getAthleteGuest(), false, LocalDateTime.now());
 			atheteTeamRepository.save(athleteTeam);
 			invitationRepository.updateInvitaionStatus(StatusInvitationEnum.ACCEPTED.name(), invitation.getIdInvitation());
 			return true;
