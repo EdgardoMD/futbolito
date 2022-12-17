@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(): void {
-    console.log("entro a on login")
     this.loginUsuario = new LoginUsuario(this.nombreUsuario, this.password)
     this.autenticacionService.loginUsuario(this.loginUsuario).subscribe(
       data => {

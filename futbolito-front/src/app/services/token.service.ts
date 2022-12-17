@@ -37,17 +37,13 @@ export class TokenService {
 
   public setAuthorities(authorities: string[]): void{
     window.sessionStorage.removeItem(AUTHORITIES_KEY);
-    console.log(JSON.stringify(authorities))
     window.sessionStorage.setItem(AUTHORITIES_KEY, JSON.stringify(authorities));
   }
 
   public getAuthorities(): string[]{
     this.roles = [];
-    console.log('entro a get usuario')
     if(sessionStorage.getItem(AUTHORITIES_KEY)){
-      console.log('entro al if')
       JSON.parse(sessionStorage.getItem(AUTHORITIES_KEY) as string).forEach((authority: { authority: string; }) => {
-        console.log('autorizacion' + authority.authority)
         this.roles.push(authority.authority)
         
       });

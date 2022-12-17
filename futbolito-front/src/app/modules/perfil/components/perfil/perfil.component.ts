@@ -33,8 +33,6 @@ export class PerfilComponent implements OnInit {
   }
 
   mostrarPerfil(){
-    console.log('mostramos en nuevo metodo')
-    console.log(this.perfil)
   }
 
   logOut(): void {
