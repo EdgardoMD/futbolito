@@ -23,7 +23,9 @@
             "outputPath": "dist/futbolito-front",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
@@ -31,13 +33,14 @@
               "src/assets"
             ],
             "styles": [
+              "src/custom-theme.scss",
               "src/styles.css",
               "node_modules/materialize-css/dist/css/materialize.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
             "scripts": [
               "node_modules/materialize-css/dist/js/materialize.min.js",
-              "node_modules/@fortawesome/fontawesome-free/js/all.min.js"
+              "node_modules/@fortawesome/fontawesome-free/js/all.min.js" 
             ]
           },
           "configurations": {
@@ -49,7 +52,6 @@
                 }
               ],
               "optimization": true,
-              "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
@@ -66,9 +68,19 @@
                   "maximumWarning": "2kb",
                   "maximumError": "4kb"
                 }
-              ]
-            }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
           }
+        },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -78,8 +90,12 @@
           "configurations": {
             "production": {
               "browserTarget": "futbolito-front:build:production"
+            },
+            "development": {
+              "browserTarget": "futbolito-front:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -90,8 +106,10 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
