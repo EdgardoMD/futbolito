@@ -48,9 +48,11 @@ public class AthleteTeam {
 	private LocalDateTime updateDate;
 	
 
-	public AthleteTeam(Team team, Athlete athlete) {
+	public AthleteTeam(Team team, Athlete athlete, Boolean isCaptain, LocalDateTime creationDate) {
 		this.team = team;
 		this.athlete = athlete;
+		this.creationDate = creationDate;
+		this.isCaptain = isCaptain;
 	}
 	
 

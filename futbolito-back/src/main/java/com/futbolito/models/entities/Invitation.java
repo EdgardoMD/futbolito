@@ -52,11 +52,12 @@ public class Invitation {
 	@Column(name="update_date")
 	private LocalDateTime updateDate;
 
-	public Invitation(Team team, Athlete athleteGuest, Athlete athleteInvites, StatusInvitation statusInvitation) {
+	public Invitation(Team team, Athlete athleteGuest, Athlete athleteInvites, StatusInvitation statusInvitation, LocalDateTime creationDate) {
 		this.team = team;
 		this.athleteGuest = athleteGuest;
 		this.athleteInvites = athleteInvites;
 		this.statusInvitation = statusInvitation;
+		this.creationDate = creationDate;
 	}
 
 }

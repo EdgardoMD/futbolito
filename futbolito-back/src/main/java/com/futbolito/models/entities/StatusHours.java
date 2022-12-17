@@ -18,8 +18,6 @@ public class StatusHours {
 
 	@Id
 	@Column(name="id_status_hours")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
 	private Long id;
 	
 	@Column(name="status")

@@ -18,8 +18,6 @@ public class StatusReservationRequest {
 	
 	@Id
 	@Column(name="id_status_reservation_requests")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
 	private Long id;
 	
 	@Column(name="status")

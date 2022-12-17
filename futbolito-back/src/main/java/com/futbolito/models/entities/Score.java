@@ -20,7 +20,6 @@ import lombok.Data;
 @Table(name="scores")
 public class Score {
 	
-	
 	@Id
 	@Column(name="id_score")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")

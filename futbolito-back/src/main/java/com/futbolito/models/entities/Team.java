@@ -15,6 +15,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -46,6 +48,7 @@ public class Team {
 	@JoinColumn(name="id_city")
 	private City city;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="team")
 	private List<AthleteTeam> athletesTeam;
 	

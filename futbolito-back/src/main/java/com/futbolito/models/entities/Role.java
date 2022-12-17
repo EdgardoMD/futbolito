@@ -18,8 +18,6 @@ public class Role {
 	
 	@Id
 	@Column(name="id_role")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
 	private int id;
 	
 	@Column(name="role")

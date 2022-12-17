@@ -26,8 +26,6 @@ public class StatusNotification {
 	
 	@Id
 	@Column(name="id_status_notification")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
 	private Long idTypeNotification;
 
 	

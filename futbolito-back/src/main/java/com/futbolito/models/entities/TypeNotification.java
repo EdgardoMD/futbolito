@@ -26,8 +26,6 @@ public class TypeNotification {
 	
 	@Id
 	@Column(name="id_notification_types")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
 	private Long idTypeNotification;
 
 	

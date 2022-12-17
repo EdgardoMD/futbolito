@@ -70,6 +70,7 @@ public class Athlete {
 
 	public Athlete(User user) {
 		this.user = user;
+		this.creationDate =LocalDateTime.now();
 	}
 	
 	

@@ -26,8 +26,6 @@ public class StatusInvitation {
 	
 	@Id
 	@Column(name = "id_status_invitation")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-	@GenericGenerator(name = "native", strategy = "native")
 	private Long idStatusInvitation;
 	
 	@Column(name="status_invitation")
