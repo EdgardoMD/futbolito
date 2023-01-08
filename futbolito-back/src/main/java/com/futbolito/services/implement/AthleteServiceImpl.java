@@ -45,7 +45,12 @@ public class AthleteServiceImpl implements IAthleteService {
 
 	@Override
 	public Athlete getById(Long id) {
-		Athlete athlete = athleteRepository.findById(id).orElseThrow();
+		Athlete athlete = null;
+		try {
+			athlete = athleteRepository.findById(id).orElseThrow(() -> new Exception("No se encontró el atleta id = " + id));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return athlete;
 	}
 
@@ -77,7 +82,7 @@ public class AthleteServiceImpl implements IAthleteService {
 	
 	@Override
 	public List<AthleteDto> findAthletesByNickStartswith(String startNick) {
-		List<Athlete> athletes = this.athleteRepository.findAthletesByNickStartswith(startNick);
+		List<Athlete> athletes = this.athleteRepository.findAthletesByNickStartswith(startNick.trim().toLowerCase());
 		List<AthleteDto> athleteDtos = null;
 		if(athletes != null && !athletes.isEmpty()) {
 			athleteDtos = listAthetesEntitiesToListAthletesDto(athletes);

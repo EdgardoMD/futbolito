@@ -62,6 +62,25 @@ INSERT INTO notification_types
 (id_notification_types, type_notification)
 VALUES(1, 'TEAM_INVITATION');
 
+INSERT INTO notification_types
+(id_notification_types, type_notification)
+VALUES(2, 'NEW_MEMBER_TEAM');
+
+
+INSERT INTO notification_types
+(id_notification_types, type_notification)
+VALUES(3, 'INVITATION_ACCEPTED');
+INSERT INTO notification_types
+(id_notification_types, type_notification)
+VALUES(4, 'INVITATION_REJECTION');
+INSERT INTO notification_types
+(id_notification_types, type_notification)
+VALUES(5, 'NEW_CHALLENGE_TEAM');
+
+
+
+
+
 ----------------------------------
 
 ----------------------------------

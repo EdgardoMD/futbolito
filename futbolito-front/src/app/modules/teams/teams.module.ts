@@ -9,6 +9,9 @@ import { ListMyTeamsComponent } from './components/list-my-teams/list-my-teams.c
 import { MyTeamComponent } from './components/my-team/my-team.component';
 import { TeamComponent } from './components/team/team.component';
 import { TeamInvitationsComponent } from './components/team-invitations/team-invitations.component';
+import { MaterialModule } from 'src/app/material.module';
+import { DialogComponent } from './dialog/dialog.component';
+
 
 
 
@@ -19,14 +22,16 @@ import { TeamInvitationsComponent } from './components/team-invitations/team-inv
     NewTeamComponent,
     MyTeamComponent,
     TeamComponent,
-    TeamInvitationsComponent
+    TeamInvitationsComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    MaterialModule
   ]
 })
 export class TeamsModule { }

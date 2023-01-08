@@ -16,6 +16,7 @@ import com.futbolito.models.DTOs.TeamWihtAthletesDto;
 import com.futbolito.models.entities.Athlete;
 import com.futbolito.models.entities.AthleteTeam;
 import com.futbolito.models.entities.City;
+import com.futbolito.models.entities.Invitation;
 import com.futbolito.models.entities.LevelTeam;
 import com.futbolito.models.entities.Team;
 import com.futbolito.repository.IAtheteTeamRepository;
@@ -63,7 +64,12 @@ public class TeamServiceImpl implements ITeamService {
 
 	@Override
 	public Team getById(Long id) {
-		return teamRepository.findById(id).orElseThrow();
+		try {
+			return teamRepository.findById(id).orElseThrow(() -> new Exception("No se encontró el equipo id = " + id));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
@@ -76,23 +82,33 @@ public class TeamServiceImpl implements ITeamService {
 	@Override
 	@Transactional
 	public TeamDto createNewTeam(TeamDto teamDto, Athlete athlete) {
-		Team team = new Team();
-		City city = cityRepository.findById(teamDto.getIdCity()).orElseThrow();
-		LevelTeam levelTeam = levelTeamRepository.findById(1L).orElseThrow();
-		team.setName(teamDto.getName());
-		team.setTeamLevel(levelTeam);
-		team.setCity(city);
-		team.setScore(0);
-		team.setCreationDate(LocalDateTime.now());
-		Team teamSaved = teamRepository.save(team);
-		AthleteTeam athleteTeam = new AthleteTeam();
-		athleteTeam.setAthlete(athlete);
-		athleteTeam.setTeam(teamSaved);
-		athleteTeam.setIsCaptain(true);
-		athleteTeam.setCreationDate(LocalDateTime.now());
-		atheteTeamRepository.save(athleteTeam);
-		TeamDto teamDtoSaved = new TeamDto(teamSaved);
-		return teamDtoSaved;
+		try {
+
+			Team team = new Team();
+			City city = cityRepository.findById(teamDto.getIdCity())
+					.orElseThrow(() -> new Exception("No se encontró el la ciudad"));
+			LevelTeam levelTeam = levelTeamRepository.findById(1L)
+					.orElseThrow(() -> new Exception("No se encontró el nivel de atleta"));
+
+			team.setName(teamDto.getName());
+
+			team.setTeamLevel(levelTeam);
+			team.setCity(city);
+			team.setScore(0);
+			team.setCreationDate(LocalDateTime.now());
+			Team teamSaved = teamRepository.save(team);
+			AthleteTeam athleteTeam = new AthleteTeam();
+			athleteTeam.setAthlete(athlete);
+			athleteTeam.setTeam(teamSaved);
+			athleteTeam.setIsCaptain(true);
+			athleteTeam.setCreationDate(LocalDateTime.now());
+			atheteTeamRepository.save(athleteTeam);
+			TeamDto teamDtoSaved = new TeamDto(teamSaved);
+			return teamDtoSaved;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override
@@ -114,18 +130,24 @@ public class TeamServiceImpl implements ITeamService {
 	public TeamWihtAthletesDto getMyTeamById(Long idTeam, Long idUser) {
 		Team team = this.getById(idTeam);
 		List<AthleteTeam> athleteTeams = team.getAthletesTeam();
-		List<Athlete> athletes = athleteTeams.stream()
-			    .map(AthleteTeam::getAthlete).collect(Collectors.toList());
+		List<Invitation> invitationsToTeam = team.getInvitationToTeam();
 		TeamDto teamDto = new TeamDto(team);
-		TeamWihtAthletesDto teamWhitAthletesDto;
-		if (!athletes.isEmpty()) {
-		    List<AthleteDto> athleteDtos = athletes.stream()
-		        .map(AthleteDto::new)
-		        .collect(Collectors.toList());
-		    teamWhitAthletesDto = new TeamWihtAthletesDto(teamDto, athleteDtos);
-		} else {
-		    teamWhitAthletesDto = new TeamWihtAthletesDto(teamDto);
+		
+		List<AthleteDto> athleteOfTeamDtos = null;
+		if (athleteTeams != null && !athleteTeams.isEmpty()) {
+		    athleteOfTeamDtos = athleteTeams.stream()
+		        .map(AthleteTeam::getAthlete)
+		        .map(AthleteDto::new).collect(Collectors.toList());
 		}
+
+		List<AthleteDto> athleteGuestDtos = null;
+		if (invitationsToTeam != null && !invitationsToTeam.isEmpty()) {
+		    athleteGuestDtos = invitationsToTeam.stream()
+		        .map(Invitation::getAthleteGuest)
+		        .map(AthleteDto::new).collect(Collectors.toList());
+		}
+		
+		TeamWihtAthletesDto teamWhitAthletesDto = new TeamWihtAthletesDto(teamDto, athleteOfTeamDtos, athleteGuestDtos);
 		teamWhitAthletesDto.getTeamDto().setIsMyTeam(belongsToTheTeam(idUser, teamWhitAthletesDto));
 		teamWhitAthletesDto.getTeamDto().setIsGuest(invitationService.thisAthleteIsAGuest(idUser, idTeam));
 		return teamWhitAthletesDto;
@@ -133,9 +155,9 @@ public class TeamServiceImpl implements ITeamService {
 	
 	@Override
 	public Boolean belongsToTheTeam(Long idUser, TeamWihtAthletesDto athletesDtos) {
-		List<AthleteDto> athletes = athletesDtos.getAthletesDto();
+		List<AthleteDto> athletes = athletesDtos.getAthletesOfTeam();
 		for (AthleteDto athlete: athletes) {
-			if(athlete.getIdUser() == idUser) {
+			if(athlete.getIdUser().longValue() == idUser.longValue()) {
 				return true;
 			}
 		}

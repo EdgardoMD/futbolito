@@ -26,6 +26,14 @@ public interface INotificationService extends ICRUD<Notification> {
 	 */
 	void createNotification(User userToNotify, Long idReference, TypeNotificationEnum typeNotification);
 
+	/**
+	 * crea un listado de notificaciones
+	 * @param usersToNotify
+	 * @param idReference
+	 * @param typeNotification
+	 */
+	void createListNotifications(List<User> usersToNotify, Long idReference, TypeNotificationEnum typeNotification);
+
 
 
 }

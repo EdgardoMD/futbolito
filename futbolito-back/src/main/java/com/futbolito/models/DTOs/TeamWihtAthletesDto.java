@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 public class TeamWihtAthletesDto {
 	
 	private TeamDto teamDto;
-	private List<AthleteDto> athletesDto ;
+	private List<AthleteDto> athletesOfTeam ;
+	private List<AthleteDto> athletesGuest ;
 	
 	public TeamWihtAthletesDto(TeamDto teamDto){
 		this.teamDto = teamDto;

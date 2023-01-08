@@ -28,7 +28,6 @@ public class AthleteDto {
 	
 	public AthleteDto(Athlete athlete) {
 		
-		idAthlete = athlete.getIdAthlete();
 		IdUser = athlete.getUser().getIdUser();
 		 height = athlete.getHeight()  ;
 		 weight = athlete.getWeight()  ;

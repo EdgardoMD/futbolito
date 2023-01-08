@@ -1,5 +1,7 @@
 package com.futbolito.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -17,7 +19,7 @@ public interface IInvitationRepository extends JpaRepository<Invitation, Long> {
 	
 	@Query(value = "select * from invitation where id_status_invitation = (select id_status_invitation  from status_invitation si where status_invitation = 'CREATED') "
 			+ "and id_athlete_guest = :id_athlete_guest and id_team = :id_team ", nativeQuery = true)
-	public Invitation findInvitationSendByGuestAndTeam(@Param("id_athlete_guest") Long idAthlete, @Param("id_team") Long idTeam);
+	public Optional<Invitation> findInvitationSendByGuestAndTeam(@Param("id_athlete_guest") Long idAthlete, @Param("id_team") Long idTeam);
 	
 	
 	

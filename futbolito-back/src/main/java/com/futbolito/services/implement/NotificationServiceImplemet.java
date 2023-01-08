@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,8 @@ import com.futbolito.services.interfaces.INotificationService;
 
 @Service
 public class NotificationServiceImplemet implements INotificationService {
+	
+	Logger logger = Logger.getLogger(NotificationServiceImplemet.class.getName());
 
 	@Autowired
 	private INotificationRepository notificationRep;
@@ -46,6 +49,10 @@ public class NotificationServiceImplemet implements INotificationService {
 	@Override
 	public Notification save(Notification notification) {
 		return notificationRep.save(notification);
+	}
+	
+	public List<Notification> saveAll(List<Notification> notifications) {
+		return notificationRep.saveAll(notifications);
 	}
 
 	@Override
@@ -129,13 +136,21 @@ public class NotificationServiceImplemet implements INotificationService {
 	
 	
 	private Map<Long, Object> searchEntities(List<Long> ids, TypeNotificationEnum typeNotification) {
-	    if (typeNotification.equals(TypeNotificationEnum.TEAM_INVITATION)) {
+		TypeNotificationEnum TEAM_INVITATION = TypeNotificationEnum.TEAM_INVITATION;
+		TypeNotificationEnum NEW_MEMBER_TEAM = TypeNotificationEnum.NEW_MEMBER_TEAM;
+		TypeNotificationEnum INVITATION_ACCEPTED = TypeNotificationEnum.INVITATION_ACCEPTED;  	
+		TypeNotificationEnum INVITATION_REJECTION = TypeNotificationEnum.INVITATION_REJECTION;
+		
+		
+	    if (typeNotification.equals(TEAM_INVITATION) || typeNotification.equals(NEW_MEMBER_TEAM) ||
+	    		typeNotification.equals(INVITATION_ACCEPTED) || typeNotification.equals(INVITATION_REJECTION)) {
 	        List<Invitation> entities = invitationRepository.findAllById(ids);
 	        if (entities != null && !entities.isEmpty()) {
 	            return entities.stream()
 	                           .collect(Collectors.toMap(Invitation::getIdInvitation, invitation -> (Object) invitation));
 	        }
-	    } // en un else if agregar la busqueda de diferentes tipos de notificaciones
+	    } 
+	    // en un else if agregar la busqueda de diferentes tipos de notificaciones
 	    return Collections.emptyMap();
 	}
 
@@ -161,11 +176,56 @@ public class NotificationServiceImplemet implements INotificationService {
 	@Async
 	@Override
 	public void createNotification(User userToNotify, Long idReference, TypeNotificationEnum typeNotification) {
-		TypeNotification typeNotifi = typeRep.findTypeNotificationbyType(typeNotification.toString()).orElseThrow();
+		TypeNotification typeNotifi;
+		try {
+			typeNotifi = typeRep.findTypeNotificationbyType(typeNotification.toString()).orElseThrow(() -> new Exception("No se encontró el tipo de notificacion = " + typeNotification.name()));
+		
 		StatusNotification statusNotification = statusRep
-				.findStatusNotificationbyStatus(StatusNotificationEnum.CREATED.name()).orElseThrow();
+				.findStatusNotificationbyStatus(StatusNotificationEnum.CREATED.name()).orElseThrow(() -> new Exception("No se encontró el estado de notificacion = CREATED"));
 		Notification notification = new Notification(userToNotify, statusNotification, typeNotifi, idReference,
 				LocalDateTime.now());
 		this.save(notification);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
+	
+	
+	@Async
+	@Override
+	public void createListNotifications(List<User> usersToNotify, Long idReference, TypeNotificationEnum typeNotification) {
+		try {
+			TypeNotification typeNotifi = typeRep.findTypeNotificationbyType(typeNotification.toString()).orElseThrow(() -> new Exception("no se encontro el tipo de notificacion"));
+			StatusNotification statusNotification = statusRep
+					.findStatusNotificationbyStatus(StatusNotificationEnum.CREATED.name()).orElseThrow(() -> new Exception("No se encontró el estado de notificacion = CREATED"));
+			List<Notification> notifications = usersToNotify.stream().map(userToNotify -> 
+					new Notification(userToNotify, statusNotification, typeNotifi, idReference, LocalDateTime.now()))
+					.collect(Collectors.toList());
+			this.saveAll(notifications);
+		} catch (Exception e) {
+			logger.severe(e.getMessage());
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -15,14 +15,14 @@ public class NewUser {
     @NotBlank
     private String name;
     
-    @NotBlank
-    private String lastName;
+//    @NotBlank
+//    private String lastName;
     
     @NotBlank
     private String nickname;
     
-    @NotBlank
-    private String phone;
+//    @NotBlank
+//    private String phone;
     
     @Email
     private String email;
@@ -30,7 +30,7 @@ public class NewUser {
     @NotBlank
     private String password;
     
-    @NotBlank
-    private String confirmationPassword;
+//    @NotBlank
+//    private String confirmationPassword;
 
 }

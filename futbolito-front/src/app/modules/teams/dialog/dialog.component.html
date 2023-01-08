@@ -1,0 +1,20 @@
+
+
+<form class="example-form" (ngSubmit)="inviteMyTeam()">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Number</mat-label>
+    <input type="text"
+           placeholder="Pick one"
+           aria-label="Number"
+           matInput
+           [formControl]="myControl"
+           [matAutocomplete]="auto"
+           #inputRef>
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option" #optionRef>
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <button mat-button class=" example-full-width bg-t1" type="submit" name="action" clas>Enviar</button>
+</form>

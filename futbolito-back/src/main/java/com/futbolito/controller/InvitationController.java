@@ -4,7 +4,6 @@ import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,7 +17,6 @@ import com.futbolito.models.DTOs.CreateInvitationTeamDto;
 import com.futbolito.security.entity.MainUser;
 import com.futbolito.services.interfaces.IInvitationService;
 
-@CrossOrigin
 @RestController
 @RequestMapping("invitation")
 public class InvitationController {
@@ -59,20 +57,20 @@ public class InvitationController {
 		return new ResponseEntity<Boolean>(false, HttpStatus.BAD_REQUEST);
 	}
 
-//	@PostMapping("/reject-invitation")
-//	public ResponseEntity<Boolean> rejectInvitationTeam(@RequestBody Long idTeam, Authentication authentication) {
-//		Long idUser = ((MainUser) authentication.getPrincipal()).getId();
-//		try {
-//			Boolean isCreated = invitationService.createInvitationToTeam(dto.getIdTeam(), dto.getIdGuest(), idUser);
-//			if (isCreated) {
-//				return new ResponseEntity<Boolean>(isCreated, HttpStatus.CREATED);
-//			}
-//		} catch (NoSuchElementException e) {
-//			System.out.println(e);
-//		} catch (Exception e) {
-//			return new ResponseEntity<Boolean>(false, HttpStatus.BAD_REQUEST);
-//		}
-//		return new ResponseEntity<Boolean>(false, HttpStatus.BAD_REQUEST);
-//	}
+	@PostMapping("/reject-invitation")
+	public ResponseEntity<Boolean> rejectInvitationTeam(@RequestParam Long idTeam, Authentication authentication) {
+		Long idUser = ((MainUser) authentication.getPrincipal()).getId();
+		try {
+			Boolean isCreated = invitationService.rejectInvitationToTeam(idTeam, idUser);
+			if (isCreated) {
+				return new ResponseEntity<Boolean>(isCreated, HttpStatus.CREATED);
+			}
+		} catch (NoSuchElementException e) {
+			System.out.println(e);
+		} catch (Exception e) {
+			return new ResponseEntity<Boolean>(false, HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<Boolean>(false, HttpStatus.BAD_REQUEST);
+	}
 
 }

@@ -1,7 +1,7 @@
 export class Athlete {
 
 	idAthlete?: number;
-	IdUser?: number;
+	idUser?: number;
 	athleteLevel?: string;
 	birthDate?: string;
 	city?: string;

@@ -1,10 +1,5 @@
 <h1>{{team.teamDto.name}}</h1>
 
-<h3>{{team.teamDto.name}} </h3>
-<h3>{{team.teamDto.score}} </h3>
-<h3>{{team.teamDto.teamLevel}} </h3>
-
-
 <table>
     <tr>
         <th>
@@ -21,7 +16,7 @@
         </th>
         <th></th>
     </tr>
-    <tr *ngFor="let athlete of team.athletesDto;">
+    <tr *ngFor="let athlete of team.athletesOfTeam;">
         <td>
             {{athlete.nick}}
         </td>
@@ -42,35 +37,7 @@
 </table>
 
 
-invitar jugador
 
-<input type="text"  [(ngModel)]="search" (ngModelChange)="searchAthlete($event)">
-
-<table g-if="athletesFound.length > 0 ">
-    tabla
-    <tr  *ngFor="let athlete of athletesFound;">
-        <button (click)="inviteMyTeam(team.teamDto.id, athlete.idAthlete)">
-        <td>
-            {{athlete.nick}}
-        </td>
-        <td>
-            {{athlete.name}}
-        </td>
-    </button>
-    </tr>
-</table>
-
-
-  <!-- Modal Trigger -->
-  <a class="waves-effect waves-light btn modal-trigger" href="my-team#modal1">Modal</a>
-
-  <!-- Modal Structure -->
-  <div id="modal1" class="modal bottom-sheet">
-    <div class="modal-content">
-      <h4>Modal Heade</h4>
-      <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
-  </div>
+<div  *ngIf="teamCharge">
+    <button class="btn-floating btn-small t-s7" (click)="openDialog()"><i class="material-icons">add</i></button>
+</div>

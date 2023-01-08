@@ -15,7 +15,6 @@ import com.futbolito.models.entities.Athlete;
 import com.futbolito.security.entity.MainUser;
 import com.futbolito.services.interfaces.IAthleteService;
 
-@CrossOrigin
 @RestController
 @RequestMapping("profile")
 public class ProfileController {

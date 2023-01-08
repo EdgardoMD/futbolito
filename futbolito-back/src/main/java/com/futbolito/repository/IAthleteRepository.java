@@ -17,7 +17,7 @@ public interface IAthleteRepository extends JpaRepository<Athlete, Long> {
 	@Query(value = "select * from athletes a where id_athletes in (select a_t.id_athlete from athletes_teams a_t where a_t.id_team = :id_team)", nativeQuery = true)
 	List<Athlete> getAthletesByIdTeams(@Param("id_team") Long idTeam);
 	
-	@Query(value = "select * from athletes a where id_user in (select id_user from users where nick_name like :nick || '%' limit 10)", nativeQuery = true)
+	@Query(value = "select * from athletes a where id_user in (select id_user from users where LOWER(nick_name) LIKE LOWER(:nick) || '%' limit 10)", nativeQuery = true)
 	List<Athlete> findAthletesByNickStartswith(@Param("nick") String startNick);
 
 }

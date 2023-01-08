@@ -2,11 +2,13 @@ package com.futbolito.services.implement;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.futbolito.models.entities.Athlete;
@@ -14,6 +16,7 @@ import com.futbolito.models.entities.AthleteTeam;
 import com.futbolito.models.entities.Invitation;
 import com.futbolito.models.entities.StatusInvitation;
 import com.futbolito.models.entities.Team;
+import com.futbolito.models.entities.User;
 import com.futbolito.models.enums.StatusInvitationEnum;
 import com.futbolito.models.enums.TypeNotificationEnum;
 import com.futbolito.repository.IAtheteTeamRepository;
@@ -26,6 +29,8 @@ import com.futbolito.services.interfaces.INotificationService;
 
 @Service
 public class InvitationServiceImpl implements IInvitationService {
+	
+	Logger logger = Logger.getLogger(InvitationServiceImpl.class.getName());
 
 	@Autowired
 	private ITeamRepository teamRepository;
@@ -76,10 +81,10 @@ public class InvitationServiceImpl implements IInvitationService {
 			if (invitationRepository.thisAthleteIsAGuest(idguest, idTeam)) {
 				throw new Exception("jugador ya esta invitado a este equipo");
 			}
-			Athlete athleteGuest = athleteRepository.findById(idguest).orElseThrow();
-			Athlete athleteInvites = athleteRepository.findByUserId(idInvites).orElseThrow();
+			Athlete athleteGuest = athleteRepository.findById(idguest).orElseThrow(() -> new Exception("No se encontró el atleta invitado"));
+			Athlete athleteInvites = athleteRepository.findByUserId(idInvites).orElseThrow(() -> new Exception("No se encontró el atleta que invita"));
 			
-			Team team = this.teamRepository.findById(idTeam).orElseThrow();
+			Team team = this.teamRepository.findById(idTeam).orElseThrow(() -> new Exception("No se encontró el equipo"));
 			List<Athlete> athletesBelongingToTeam = team.getAthletesTeam().stream()
 				    .map(AthleteTeam::getAthlete).collect(Collectors.toList());
 			if (!athletesBelongingToTeam.contains(athleteInvites)) {
@@ -94,39 +99,99 @@ public class InvitationServiceImpl implements IInvitationService {
 				throw new Exception("un jugador no capitan no puede invitar a un equipo");
 			}
 			StatusInvitation initialInvitation = statusInvitationRepository
-					.findByStatusInvitation(StatusInvitationEnum.CREATED.name()).orElseThrow();
+					.findByStatusInvitation(StatusInvitationEnum.CREATED.name()).orElseThrow(() -> new Exception("No se encontró el estatus creado de invitacion"));
 			Invitation invitation = new Invitation(team, athleteGuest, athleteInvites, initialInvitation, LocalDateTime.now());
 			Invitation invitationSave = invitationRepository.save(invitation);
 			notificationService.createNotification(athleteGuest.getUser(), invitationSave.getIdInvitation(),
 					TypeNotificationEnum.TEAM_INVITATION);
 			return invitationSave != null && invitationSave.getIdInvitation() != 0;
 		} catch (Exception e) {
-			System.out.println(e);
+			logger.severe(e.getMessage());
+			e.printStackTrace();
 			return false;
 		}
 		
 	}
 
 	@Override
+	@Transactional
 	public Boolean thisAthleteIsAGuest(Long idAthlete, Long idTeam) {
 		return invitationRepository.thisAthleteIsAGuest(idAthlete, idTeam);
 	}
 	
 	
+	
 	@Transactional
-	@Override
 	public Boolean acceptInvitationToTeam(Long idTeam, Long Idguest) {
 		try {
-			Invitation invitation = invitationRepository.findInvitationSendByGuestAndTeam(Idguest, idTeam);
+			Invitation invitation = invitationRepository.findInvitationSendByGuestAndTeam(Idguest, idTeam).orElseThrow(()-> new Exception("no se encontro invitacion activa"));
 			AthleteTeam athleteTeam = new AthleteTeam(invitation.getTeam(), invitation.getAthleteGuest(), false, LocalDateTime.now());
-			atheteTeamRepository.save(athleteTeam);
-			invitationRepository.updateInvitaionStatus(StatusInvitationEnum.ACCEPTED.name(), invitation.getIdInvitation());
+			this.acceptInvitation(invitation, athleteTeam);
+			this.notifynewAthlete(invitation);
 			return true;
 		} catch (Exception e) {
-			System.out.println(e);
+			logger.severe(e.getMessage());
+			e.printStackTrace();
 			return false;
 		}
 		
+	}
+	
+	
+	
+	@Transactional
+	private void acceptInvitation(Invitation invitation, AthleteTeam athleteTeam ) throws Exception {
+		try {
+			atheteTeamRepository.save(athleteTeam);
+			invitationRepository.updateInvitaionStatus(StatusInvitationEnum.ACCEPTED.name(), invitation.getIdInvitation());
+		} catch (Exception e) {
+			throw new Exception("problemas al guardar la aceptacion de la invitacion", e);
+		}
+		
+	}
+	
+	@Async
+	private void notifynewAthlete(Invitation invitation) {
+		
+		List<User> users = invitation.getTeam().getAthletesTeam().stream()
+			    .map(AthleteTeam::getAthlete)
+			    .map(Athlete::getUser)
+			    .collect(Collectors.toList());
+		User invitesUser = invitation.getAthleteInvites().getUser();
+		users.remove(invitesUser);
+		notificationService.createListNotifications(users, invitation.getIdInvitation(), TypeNotificationEnum.NEW_MEMBER_TEAM);
+		notificationService.createNotification(invitesUser, invitation.getIdInvitation(), TypeNotificationEnum.INVITATION_ACCEPTED);
+	}
+	
+	@Override
+	public Boolean rejectInvitationToTeam(Long idTeam, Long Idguest) {
+		try {
+			Invitation invitation = invitationRepository.findInvitationSendByGuestAndTeam(Idguest, idTeam).orElseThrow(()-> new Exception("no se encontro invitacion activa"));
+			this.rejectInvitation(invitation);
+			this.notifyRejectInvitation(invitation);
+			return true;
+		} catch (Exception e) {
+			logger.severe(e.getMessage());
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+	
+	
+	@Transactional
+	private void rejectInvitation(Invitation invitation) throws Exception {
+		try {
+			invitationRepository.updateInvitaionStatus(StatusInvitationEnum.REJECTED.name(), invitation.getIdInvitation());
+		} catch (Exception e) {
+			throw new Exception("problemas al guardar la aceptacion de la invitacion", e);
+		}
+		
+	}
+	
+	@Async
+	private void notifyRejectInvitation(Invitation invitation) {
+		notificationService.createNotification(invitation.getAthleteInvites().getUser(), invitation.getIdInvitation(), TypeNotificationEnum.INVITATION_REJECTION);
 	}
 
 }

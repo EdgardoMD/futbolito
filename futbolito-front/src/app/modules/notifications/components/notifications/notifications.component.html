@@ -1,32 +1,42 @@
+<div *ngFor="let notification of notifications;" class="t-t1" >
 
-<div *ngFor="let notification of notifications;" >
-    <a [routerLink]="['/team/', notification.data.team.id]">
-            <div class="card " *ngIf="notification.typeNotification == TEAM_INVITATION">
-                <div class="card-content">
-                  <p> {{notification.data.athleteInvites.user.nickName}} te ha invitado a ser parte del equipo  {{notification.data.team.name}}</p>
-                </div>
-            </div>
+  <a *ngIf="notification.typeNotification == TEAM_INVITATION" [routerLink]="['/team/', notification.data.team.id]">
+    <div class="card  bg-s7" >
+      <div class="card-content t-t1 bg-s7">
+        <p class=""> <b>'{{notification.data.athleteInvites.user.nickName | uppercase}}'</b> te ha invitado a ser parte del equipo 
+        <b>'{{notification.data.team.name | uppercase}}'</b></p>
+      </div>
+    </div>
+  </a>
+
+  <a *ngIf="notification.typeNotification == INVITATION_ACCEPTED" [routerLink]="['/team/', notification.data.team.id]">
+    <div class="card ">
+      <div class="card-content t-t1 bg-s7">
+        <p><b>'{{notification.data.athleteGuest.user.nickName | uppercase}}'</b> ha aceptado tu invitación al equipo
+        <b>'{{notification.data.team.name | uppercase}}'</b></p>
+      </div>
+    </div>
+  </a>
+
+  <a *ngIf="notification.typeNotification == INVITATION_REJECTION" [routerLink]="['/team/', notification.data.team.id]">
+    <div class="card ">
+      <div class="card-content t-t1 bg-s7">
+        <p> <b>'{{notification.data.athleteGuest.user.nickName | uppercase}}</b>' ha rechazado la invitación a tu equipo
+        <b>'{{notification.data.team.name | uppercase}}'</b></p>
+      </div>
+    </div>
+  </a>
+
+  <a *ngIf="notification.typeNotification == NEW_MEMBER_TEAM" [routerLink]="['/team/', notification.data.team.id]">
+    <div class="card ">
+      <div class="card-content t-t1 bg-s7">
+        <p><b> '{{notification.data.athleteGuest.user.nickName | uppercase}}'</b> es un nuevo miembro del equipo
+        <b>'{{notification.data.team.name | uppercase}}'</b></p>
+      </div>
+    </div>
+  </a>
+
+ 
 
 
-           
-
-
-
-
-       
-       
-           
-      
-        </a>
 </div>
-
-
-
-
-
-
-
-
-
-
-

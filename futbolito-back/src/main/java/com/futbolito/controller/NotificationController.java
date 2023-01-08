@@ -16,7 +16,6 @@ import com.futbolito.models.DTOs.NotificationDto;
 import com.futbolito.security.entity.MainUser;
 import com.futbolito.services.interfaces.INotificationService;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("notifications")
 public class NotificationController {

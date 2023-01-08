@@ -83,15 +83,16 @@ public class UserServiceImpl implements IUserService {
 		user.setMail(newUser.getEmail());
 		user.setName(newUser.getName());
 		user.setPassword( passwordEncoder.encode(newUser.getPassword()));
-		user.setPhone(newUser.getPhone());
-		user.setNickName(newUser.getNickname());
+	//	user.setPhone(newUser.getPhone());
+		user.setNickName(newUser.getNickname().toLowerCase().trim());
 		user.setCreationDate(LocalDateTime.now());
 		User registeredUser = save(user);
 		UserRole rolUsuario = new UserRole();
 		rolUsuario.setUser(registeredUser);
 		rolUsuario.setRole(rolRep.findById(ID_ROL_DEPORTISTA).get());
 		UsuarioRolRep.save(rolUsuario);
-		athleteRepository.save(new Athlete(user));
+		Athlete athlete = new Athlete(user);
+		athleteRepository.save(athlete);
 		return usuarioRep.findById(registeredUser.getIdUser()).get();
 	}
 

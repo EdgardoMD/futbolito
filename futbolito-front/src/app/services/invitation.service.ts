@@ -21,10 +21,18 @@ export class InvitationService {
   public acceptInvitationTeam(idTeam :number) : Observable<boolean>{
     let params = new HttpParams().set('idTeam', idTeam.toString());
     return this.httpClient.post<boolean>(this.invitationURL + '/accept-invitation', null, {params: params});
-}
+  }
+
+  public rejectInvitationTeam(idTeam :number) : Observable<boolean>{
+    let params = new HttpParams().set('idTeam', idTeam.toString());
+    return this.httpClient.post<boolean>(this.invitationURL + '/reject-invitation', null, {params: params});
+  }
+
+
+
 
 //xcrear funcionalidad que recargue el componete una vez que acepte la invitacion
-//crear servicio para rechazar la invitacion
+
 
 
 

@@ -22,7 +22,6 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin
 public class AuthController {
 
 	@Autowired
@@ -52,8 +51,8 @@ public class AuthController {
 	public ResponseEntity<JwtDto> login(@Valid @RequestBody UserLogin loginUsuario, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
 			return new ResponseEntity(new Message("campos mal puestos"), HttpStatus.BAD_REQUEST);
-		Authentication authentication = authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(loginUsuario.getNombreUsuario(), loginUsuario.getPassword()));
+		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+				loginUsuario.getNombreUsuario().toLowerCase(), loginUsuario.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtProvider.generateToken(authentication);
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();

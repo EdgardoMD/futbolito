@@ -4,5 +4,7 @@ import { Team } from "./team";
 export interface  TeamWithAthletes {
 
     teamDto :Team ;
-	athletesDto : Athlete[] ;
+	athletesOfTeam : Athlete[] ;
+    athletesGuest:  Athlete[] ;
+
 }

@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -50,7 +52,13 @@ public class Team {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="team")
+	@Fetch(FetchMode.JOIN)
 	private List<AthleteTeam> athletesTeam;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="team")
+	//@Fetch(FetchMode.JOIN)
+	private List<Invitation> invitationToTeam;
 	
 	@Column(name="creation_date", updatable = false, nullable = false)
 	private LocalDateTime creationDate;

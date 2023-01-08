@@ -30,4 +30,12 @@ public interface IInvitationService extends ICRUD<Invitation>{
 	 */
 	Boolean acceptInvitationToTeam(Long idTeam, Long Idguest);
 
+	/**
+	 *  RECHAZAR la invitacion enviada para ser parte de un equipo
+	 * @param idTeam
+	 * @param Idguest
+	 * @return
+	 */
+	Boolean rejectInvitationToTeam(Long idTeam, Long Idguest);
+
 }

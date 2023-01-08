@@ -22,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException {
-        User usuario = usuarioSer.getUserByNickName(nombreUsuario).get();
+        User usuario = usuarioSer.getUserByNickName(nombreUsuario.toLowerCase()).get();
         usuario.setRoles( usuarioRolRepositorio.listRoleByUserId(usuario.getIdUser()));
         
         return MainUser.build(usuario);

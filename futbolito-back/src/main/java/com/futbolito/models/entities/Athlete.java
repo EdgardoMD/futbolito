@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -28,8 +29,6 @@ public class Athlete {
 	
 	@Id
 	@Column(name="id_athletes")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
 	private Long idAthlete;
 	
 	@OneToOne
@@ -71,6 +70,7 @@ public class Athlete {
 	public Athlete(User user) {
 		this.user = user;
 		this.creationDate =LocalDateTime.now();
+		this.idAthlete = user.getIdUser();
 	}
 	
 	

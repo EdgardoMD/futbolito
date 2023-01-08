@@ -15,7 +15,6 @@ import org.springframework.web.server.ResponseStatusException;
 import com.futbolito.models.DTOs.AthleteDto;
 import com.futbolito.services.interfaces.IAthleteService;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("athlete")
 public class AthleteController {
@@ -24,13 +23,12 @@ public class AthleteController {
 	private IAthleteService athleteService;
 
 	@GetMapping("/search-athlete")
-	public ResponseEntity<List<AthleteDto>> findAthletesByNickStartswith(@RequestParam String startWith) {
-		if (startWith.length() > 3) {
+	public ResponseEntity<Object> findAthletesByNickStartswith(@RequestParam String startWith) {
+		if (startWith.length() >= 3) {
 			List<AthleteDto> athleteDtos = athleteService.findAthletesByNickStartswith(startWith);
-			return new ResponseEntity<List<AthleteDto>>(athleteDtos, HttpStatus.OK);
+			return new ResponseEntity<>(athleteDtos, HttpStatus.OK);
 		} else {
-			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-					"String a buscar debe ser mayor o igual a 4");
+			 return ResponseEntity.badRequest().body("El recurso solicitado no se ha encontrado");
 		}
 	}
 }

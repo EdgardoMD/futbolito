@@ -1,13 +1,18 @@
-<div class="card " *ngIf="team.teamDto.isGuest">
-    <div class="card-content" (click)="acceptInvitationTeam()">
-        <p> es invitado</p>
-      </div>
-  </div>
-  <div class="card " *ngIf="!team.teamDto.isGuest">
-    <div class="card-content">
-        <p>no es invitado</p>
-      </div>
-  </div>
+<div class="container">
+  <mat-card *ngIf="team.teamDto.isGuest">
+    <mat-card-header>
+      <mat-card-title>Has sido invitado a ser parte de este equipo </mat-card-title>
+      <mat-card-subtitle>¿Quieres formar parte del equipo?</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions class="list" >
+        <button (click)="acceptInvitationTeam()" mat-fab extended color="primary" class="ul">si, quiero!</button>
+        <button (click)="rejectInvitationTeam()"mat-fab extended color="warn" class="ul">no me interesa</button>
+    </mat-card-actions>
+  </mat-card>
+
+
+
+ 
   <div class="card " *ngIf="team.teamDto.isMyTeam">
     <div class="card-content">
         <p> es mi equipo</p>
@@ -20,3 +25,4 @@
   </div>
 
 <h1>{{team.teamDto.name}}</h1>
+</div>

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Athlete } from 'src/app/models/athlete.model';
 import { InvitationService } from 'src/app/services/invitation.service';
 import { TeamsService } from 'src/app/services/teams.service';
 import { TeamWithAthletes } from '../../../../models/team-with-athletes';
 import { AthleteService } from '../../../../services/athlete.service';
+import { DialogComponent } from '../../dialog/dialog.component';
 
 @Component({
   selector: 'app-my-team',
@@ -14,15 +16,17 @@ import { AthleteService } from '../../../../services/athlete.service';
 export class MyTeamComponent implements OnInit {
 
   idMyTeam : number = 0;
-  team: TeamWithAthletes =  {teamDto:{}, athletesDto:[]};
-  athletesFound: Athlete[] = [];
-  public search: string = '';
+  team: TeamWithAthletes =  {teamDto:{}, athletesOfTeam:[], athletesGuest:[]};
+  teamCharge = false;
+ 
+  
 
   constructor(
     private teamService : TeamsService,
-    private athleteService : AthleteService,
-    private invitationService : InvitationService,
-    private router : Router
+   
+    private router : Router, 
+    public dialog: MatDialog,
+
   ) { }
 
   ngOnInit(): void {
@@ -36,6 +40,7 @@ export class MyTeamComponent implements OnInit {
       this.teamService.getMyTeam(this.idMyTeam).subscribe(
         team => {
           this.team = team;
+          this.teamCharge = true;
         }
        )
     } else {
@@ -43,22 +48,16 @@ export class MyTeamComponent implements OnInit {
     }
   }
 
-  searchAthlete(nick: any) :void {
-    if(this.search.length > 3){
-      this.athleteService.searchAthleteByNick(nick).subscribe(
-        athletes => {
-          this.athletesFound = athletes
-        }
-       )
-    }
-  }
 
-  inviteMyTeam(idTeam : any, idAthele: any ){
-    this.invitationService.createdInvitationMyTeam( idTeam , idAthele).subscribe(
-      response => {
-        console.log("responde = "  + response)
-      }
-    )
+
+
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {team : this.team},
+      width: '300px'
+    });
+
   }
 
 

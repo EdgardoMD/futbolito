@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.futbolito.models.DTOs.TeamWihtAthletesDto;
 
 
-@CrossOrigin
 @RestController
 @RequestMapping("user")
 public class UserController {
