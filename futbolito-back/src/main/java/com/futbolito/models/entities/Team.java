@@ -57,7 +57,6 @@ public class Team {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="team")
-	//@Fetch(FetchMode.JOIN)
 	private List<Invitation> invitationToTeam;
 	
 	@Column(name="creation_date", updatable = false, nullable = false)
@@ -65,5 +64,13 @@ public class Team {
 	
 	@Column(name="update_date")
 	private LocalDateTime updateDate;
+
+	@ManyToOne
+	@JoinColumn(name="gender")
+	private Gender gender;
+
+	@ManyToOne
+	@JoinColumn(name="sport_type")
+	private SportType sportType;
 
 }

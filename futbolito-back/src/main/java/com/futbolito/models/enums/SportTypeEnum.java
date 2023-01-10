@@ -1,0 +1,20 @@
+package com.futbolito.models.enums;
+
+public enum SportTypeEnum {
+	
+	FOOTBALL,
+	FOOTBALL6,
+	FOOTBALL5,
+	STREET_FOOTBALL,
+	INDOOR_FOOTBALL,
+	TENNIS,
+	PADDLE,
+	TABLE_TENNIS,
+	HANDBALL,
+	BASKETBALL,
+	VOLLEYBALL,
+	RUGBY
+	
+	
+
+}

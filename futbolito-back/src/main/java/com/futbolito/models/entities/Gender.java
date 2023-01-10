@@ -7,7 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.futbolito.models.enums.TypeNotificationEnum;
+import com.futbolito.models.enums.GenderEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,16 +17,21 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="notification_types")
-public class TypeNotification {
+@Table(name="genders")
+public class Gender {
 	
 	@Id
-	@Column(name="id_notification_types")
-	private Long idTypeNotification;
-
+	@Column(name="id_genders")
+	private Long idGender;
 	
-	@Column(name="type_notification")
+	@Column(name="gender")
 	@Enumerated(EnumType.STRING)
-	private TypeNotificationEnum typeNotification;
+	private GenderEnum Gender;
+	
+	@Column(name="is_gender_team")
+	private boolean isGenderTeam;
+	
+	@Column(name="is_gender_athlete")
+	private boolean isGenderAthlete;
 
 }
