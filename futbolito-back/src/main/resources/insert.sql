@@ -1,4 +1,53 @@
 ----------------------------------
+--------TIPO DE DEPORTES----------
+----------------------------------
+
+INSERT INTO sports_types
+(id_sport_type, is_team_sport, sport_type)
+VALUES(1, true, 'FOOTBALL');
+INSERT INTO sports_types
+(id_sport_type, is_team_sport, sport_type)
+VALUES(2, true, 'FOOTBALL6');
+INSERT INTO sports_types
+(id_sport_type, is_team_sport, sport_type)
+VALUES(3, true, 'FOOTBALL5');
+INSERT INTO sports_types
+(id_sport_type, is_team_sport, sport_type)
+VALUES(4, true, 'STREET_FOOTBALL');
+INSERT INTO sports_types
+(id_sport_type, is_team_sport, sport_type)
+VALUES(5, true, 'INDOOR_FOOTBALL');
+INSERT INTO sports_types
+(id_sport_type, is_team_sport, sport_type)
+VALUES(6, false, 'TENNIS');
+INSERT INTO sports_types
+(id_sport_type, is_team_sport, sport_type)
+VALUES(7, false, 'PADDLE');
+INSERT INTO sports_types
+(id_sport_type, is_team_sport, sport_type)
+VALUES(8, false, 'TABLE_TENNIS');
+INSERT INTO sports_types
+(id_sport_type, is_team_sport, sport_type)
+VALUES(9, true, 'HANDBALL');
+INSERT INTO sports_types
+(id_sport_type, is_team_sport, sport_type)
+VALUES(10, true, 'BASKETBALL');
+INSERT INTO sports_types
+(id_sport_type, is_team_sport, sport_type)
+VALUES(11, true, 'VOLLEYBALL');
+INSERT INTO sports_types
+(id_sport_type, is_team_sport, sport_type)
+VALUES(12, true, 'RUGBY');
+
+
+
+
+
+
+
+
+
+----------------------------------
 ------------ROLES-----------------
 ----------------------------------
 
