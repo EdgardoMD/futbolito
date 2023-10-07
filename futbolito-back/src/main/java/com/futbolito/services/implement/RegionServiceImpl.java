@@ -2,13 +2,18 @@ package com.futbolito.services.implement;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.futbolito.models.entities.Region;
+import com.futbolito.repository.IRegionRepository;
 import com.futbolito.services.interfaces.IRegionService;
 
 @Service
 public class RegionServiceImpl implements IRegionService {
+	
+	@Autowired
+	private IRegionRepository regionRepository;
 
 	@Override
 	public Region save(Region obj) {
@@ -24,8 +29,8 @@ public class RegionServiceImpl implements IRegionService {
 
 	@Override
 	public List<Region> toList() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return regionRepository.findAll();
 	}
 
 	@Override
